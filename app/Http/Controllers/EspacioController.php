@@ -10,7 +10,7 @@ use App\Http\Requests\EspacioFormRequest;
 use DB;
 class EspacioController extends Controller
 {
-      public function __construct(){
+    public function __construct(){
 
     }
     public function index(Request $request){

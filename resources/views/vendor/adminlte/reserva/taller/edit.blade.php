@@ -1,6 +1,6 @@
 @extends('adminlte::layouts.app')
 @section('encabezado')
-	Editar Registro: {{$espacio->nomb}}
+	Editar Registro: {{$taller->nomb}}
 @endsection
 @section('main-content')
 	<div class="row">
@@ -18,19 +18,23 @@
 			el route es el nombre del enrutamiento + . + metodo a llamar
 			-->
 
-			{!!Form::model($espacio,['method'=>'PATCH','route'=>['espacio.update',$espacio->id]])!!}
+			{!!Form::model($taller,['method'=>'PATCH','route'=>['taller.update',$taller->id]])!!}
 			{{Form::token()}}
 				<div class="form-group">
-					<label for="nomb">Nombre Espacio</label>
-					<input type="text" name="nomb" class="form-control" value="{{$espacio->nomb}}" placeholder="Nombre Espacio...">
+					<label for="nomb">Nombre Taller</label>
+					<input type="text" name="nomb" class="form-control" value="{{$taller->nomb}}" placeholder="Nombre Taller...">
 				</div>
 				<div class="form-group">
 					<label for="desc">Descripcion</label>
-					<input type="text" name="desc" class="form-control" value="{{$espacio->desc}}" placeholder="Descripcion...">
+					<input type="text" name="desc" class="form-control" value="{{$taller->desc}}" placeholder="Descripcion...">
 				</div>
 				<div class="form-group">
 					<label for="capa">Capacidad</label>
-					<input type="number" name="capa" class="form-control" value="{{$espacio->capa}}" placeholder="Capacidad...">
+					<input type="number" name="capa" class="form-control" value="{{$taller->capa}}" placeholder="Capacidad...">
+				</div>
+				<div class="form-group">
+					<label for="prec">Precio</label>
+					<input type="number" name="prec" step="0.01" class="form-control" value="{{$taller->prec}}" placeholder="Precio...">
 				</div>
 				<div class="form-group">
 					<button class="btn btn-primary" type="submit">Guardar</button>
