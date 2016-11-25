@@ -36,6 +36,8 @@
             <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
             <li><a href="{{ URL::to('instituto')}}"><i class='fa fa-link'></i> <span>Institutos</span></a></li>
              <li><a href="{{ URL::to('espacio')}}"><i class='fa fa-link'></i> <span>Espacios</span></a></li>
+             <li><a href="{{ URL::to('taller')}}"><i class='fa fa-link'></i> <span>Talleres</span></a></li>
+             <li><a href="{{ URL::to('exhibicion')}}"><i class='fa fa-link'></i> <span>Exhibiciones</span></a></li>
             <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.multilevel') }}</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
