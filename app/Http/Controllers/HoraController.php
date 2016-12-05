@@ -15,7 +15,7 @@ class HoraController extends Controller
     public function index(Request $request){
     	if ($request) {
     		$query=trim($request->get('searchText'));
-    		$horas =DB::table('horas')->where('hora','LIKE','%'.$query.'%')->where('condicion','=','1')->orderBy('id','desc')->paginate(7);
+    		$horas =DB::table('horas')->where('hora_inic','LIKE','%'.$query.'%')->where('condicion','=','1')->orderBy('id','hora_inic')->paginate(7);
             //Este view si es la absoluta dentro de carpetas
     		return view('adminlte::reserva.hora.index',["horas"=>$horas,"searchText"=>$query]);
     	}
@@ -25,7 +25,8 @@ class HoraController extends Controller
     }
     public function store(HoraFormRequest $request){
     	$hora = new Hora;
-    	$hora->nomb=$request->get('hora');
+    	$hora->hora_inic=$request->get('hora_inic');
+        $hora->hora_fina=$request->get('hora_fina');
     	$hora->condicion='1';
     	$hora->save();
         //El redirect es con respecto al nombre que tiene en el enrutamiento
@@ -39,7 +40,8 @@ class HoraController extends Controller
     }
     public function update(HoraFormRequest $request, $id){
     	$hora=Hora::findOrFail($id);
-    	$hora->hora=$request->get('hora');
+    	$hora->hora_inic=$request->get('hora_inic');
+        $hora->hora_fina=$request->get('hora_fina');
     	$hora->update();
     	return redirect('hora')->with('message','Se ha actualizado exitosamente');
     }

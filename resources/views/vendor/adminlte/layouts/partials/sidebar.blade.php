@@ -38,6 +38,9 @@
              <li><a href="{{ URL::to('espacio')}}"><i class='fa fa-link'></i> <span>Espacios</span></a></li>
              <li><a href="{{ URL::to('taller')}}"><i class='fa fa-link'></i> <span>Talleres</span></a></li>
              <li><a href="{{ URL::to('exhibicion')}}"><i class='fa fa-link'></i> <span>Exhibiciones</span></a></li>
+             <li><a href="{{ URL::to('paquete')}}"><i class='fa fa-link'></i> <span>Paquetes</span></a></li>
+             <li><a href="{{ URL::to('hora')}}"><i class='fa fa-link'></i> <span>Horas</span></a></li>
+             <li><a href="{{ URL::to('horario')}}"><i class='fa fa-link'></i> <span>Horarios</span></a></li>
             <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.multilevel') }}</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">

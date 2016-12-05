@@ -26,3 +26,5 @@ Route::resource('/espacio','EspacioController');
 Route::resource('/taller','TallerController');
 Route::resource('/exhibicion','ExhibicionController');
 Route::resource('/paquete','PaqueteController');
+Route::resource('/hora','HoraController');
+Route::resource('/horario','HorarioController');

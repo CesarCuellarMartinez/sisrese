@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Hora extends Model
+class Horario extends Model
 {
-    protected $table = "horas";
+    protected $table = "horarios";
 	protected $primaryKey ='id';
 	protected $fillable=[
-		'hora_inic',
-		'hora_fina',
+		'desc',
 		'condicion'
+		
 		
 	];
 	protected $guarded=[

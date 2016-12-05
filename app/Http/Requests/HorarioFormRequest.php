@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class HoraFormRequest extends FormRequest
+class HorarioFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class HoraFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'hora_inic'=>'required',
-            'hora_fina'=>'required'
+            'desc'=>'required | max:200'
         ];
     }
 }
