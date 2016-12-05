@@ -25,3 +25,4 @@ Route::resource('/instituto','InstitutoController');
 Route::resource('/espacio','EspacioController');
 Route::resource('/taller','TallerController');
 Route::resource('/exhibicion','ExhibicionController');
+Route::resource('/paquete','PaqueteController');
