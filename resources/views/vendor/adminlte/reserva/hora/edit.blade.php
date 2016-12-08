@@ -14,27 +14,51 @@
 					</ul>
 				</div>
 			@endif
+		</div>
+	</div>
 			<!--El url es de las rutas
 			el route es el nombre del enrutamiento + . + metodo a llamar
 			-->
 
-			{!!Form::model($hora,['method'=>'PATCH','route'=>['hora.update',$hora->id]])!!}
+			{!!Form::model($hora,['method'=>'PATCH','route'=>['hora.update',$hora->id],])!!}
 			{{Form::token()}}
 				
-				<div class="form-group">
-					<label for="hora_inic">Hora inicial</label>
-					<input type="time" name="hora_inic" class="form-control" value="{{$hora->hora_inic}}" placeholder="Hora inicial...">
-				</div>
-				
-				<div class="form-group">
-					<label for="hora_fina">Hora Final</label>
-					<input type="time" name="hora_fina"  class="form-control" value="{{$hora->hora_fina}}" placeholder="Hora Final...">
-				</div>
-				<div class="form-group">
-					<button class="btn btn-primary" type="submit">Guardar</button>
-					<button class="btn btn-danger" type="reset">Cancelar</button>
-				</div>
-			{!!Form::close()!!}
+	<div class="row">
+		<div class="col-lg-6 col-sm-6 col-xs-12">
+			<div class="form-group">
+				<label for="hora_inic">Hora inicio</label>
+				<input type="time" required value="{{$hora->hora_inic}}" name="hora_inic" class="form-control" placeholder="Hora inicial...">
+			</div>
+		</div>
+		
+		<div class="col-lg-6 col-sm-6 col-xs-12">
+			<div class="form-group">
+				<label for="hora_fina">Hora Final</label>
+				<input type="time" required value="{{$hora->hora_fina}}" name="hora_fina" class="form-control" placeholder="Hora final...">
+			</div>
+		</div>
+
+		<div class="col-lg-6 col-sm-6 col-xs-12">
+			<div class="form-group">
+				<label>Horario</label>
+				<select name="id_horario" class="form-control">
+					@foreach ($horarios as $horari)
+						@if($horari->id==$hora->id_horario)
+						<option value="{{$horari->id}}"selected>{{$horari->desc}} </option>
+						@else
+						<option value="{{$horari->id}}">{{$horari->desc}} </option>
+						@endif
+					@endforeach
+				</select>
+			</div>	
+		</div>
+		<div class="col-lg-6 col-sm-6 col-xs-12">
+			<div class="form-group">
+				<button class="btn btn-primary" type="submit">Guardar</button>
+				<button class="btn btn-danger" type="reset">Cancelar</button>
+			</div>
 		</div>
 	</div>
+			{!!Form::close()!!}
+		
 @endsection

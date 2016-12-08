@@ -11,6 +11,7 @@ class Hora extends Model
 	protected $fillable=[
 		'hora_inic',
 		'hora_fina',
+		'id_horario',
 		'condicion'
 		
 	];

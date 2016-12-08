@@ -15,6 +15,7 @@
 				<table class="table table-striped table-bordered table-condensed table-hover">
 					<thead>
 						<th>Id</th>
+						<th>Horario</th>
 						
 						<th>Hora Inicial</th>
 						
@@ -24,7 +25,10 @@
 					@foreach($horas as $hor)
 					<tr>
 						<td>{{$hor->id}}</td>
+						<td>{{$hor->horario}}</td>
 						
+
+
 						<td>{{$hor->hora_inic}}</td>
 						
 						<td>{{$hor->hora_fina}}</td>
