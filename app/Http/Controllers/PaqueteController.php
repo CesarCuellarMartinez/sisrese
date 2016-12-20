@@ -16,7 +16,7 @@ class PaqueteController extends Controller
     public function index(Request $request){
     	if ($request) {
     		$query=trim($request->get('searchText'));
-    		$paquetes =DB::table('paquetes')->where('desc','LIKE','%'.$query.'%')->where('condicion','=','1')->orderBy('id','desc')->paginate(7);
+    		$paquetes =DB::table('paquete')->where('desc','LIKE','%'.$query.'%')->where('condicion','=','1')->orderBy('id','desc')->paginate(7);
             //Este view si es la absoluta dentro de carpetas
     		return view('adminlte::reserva.paquete.index',["paquetes"=>$paquetes,"searchText"=>$query]);
     	}
@@ -26,9 +26,9 @@ class PaqueteController extends Controller
     }
     public function store(PaqueteFormRequest $request){
     	$paquete = new Paquete;
-    	
+    	$paquete->nomb=$request->get('nomb');
     	$paquete->desc=$request->get('desc');
-    	
+    	$paquete->numb=$request->get('numb');
     	$paquete->prec=$request->get('prec');
     	$paquete->condicion='1';
     	$paquete->save();
@@ -43,9 +43,9 @@ class PaqueteController extends Controller
     }
     public function update(PaqueteFormRequest $request, $id){
     	$paquete=Paquete::findOrFail($id);
-    	
+    	$paquete->nomb=$request->get('nomb');
     	$paquete->desc=$request->get('desc');
-    	
+    	$paquete->numb=$request->get('numb');
     	$paquete->prec=$request->get('prec');
     	$paquete->update();
     	return redirect('paquete')->with('message','Se ha actualizado exitosamente');

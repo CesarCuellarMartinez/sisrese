@@ -17,7 +17,10 @@
 			<!--El url es de las rutas-->
 			{!!Form::open(array('url'=>'paquete','method'=>'POST','autocomplete'=>'off'))!!}
 			{{Form::token()}}
-			
+			<div class="form-group">
+				<label for="nomb">Nombre</label>
+				<input type="text" name="nomb" class="form-control" placeholder="Nombre...">
+			</div>
 			<div class="form-group">
 				<label for="desc">Descripcion</label>
 				<input type="text" name="desc" class="form-control" placeholder="Descripcion...">
@@ -25,6 +28,10 @@
 			<div class="form-group">
 				<label for="prec">Precio</label>
 				<input type="number" name="prec" class="form-control" placeholder="Precio...">
+			</div>
+			<div class="form-group">
+				<label for="numb">Numero de personas</label>
+				<input type="number" name="numb" class="form-control" placeholder="Numero...">
 			</div>
 			<div class="form-group">
 				<button class="btn btn-primary" type="submit">Guardar</button>

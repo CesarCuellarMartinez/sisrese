@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PaqueteFormRequest extends FormRequest
+class ReservaFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,7 @@ class PaqueteFormRequest extends FormRequest
     public function rules()
     {
         return [
-
-            'prec'=>'required ',
-            'desc'=>'max:200',
-            'nomb'=>'max:100',
-            'numb'=>'required'
-            
+            'id_instituto'=>'required'
         ];
     }
 }

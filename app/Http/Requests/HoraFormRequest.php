@@ -25,7 +25,8 @@ class HoraFormRequest extends FormRequest
     {
         return [
             'hora_inic'=>'required',
-            'hora_fina'=>'required'
+            'hora_fina'=>'required',
+            'id_horario'=>'required'
         ];
     }
 }

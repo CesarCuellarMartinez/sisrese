@@ -15,18 +15,18 @@
 				<table class="table table-striped table-bordered table-condensed table-hover">
 					<thead>
 						<th>Id</th>
-						
+						<th>Nombre</th>
 						<th>Descripcion</th>
-						
+						<th>N Personas</th>
 						<th>Precio</th>
 						<th>Opciones</th>
 					</thead>
 					@foreach($paquetes as $paqu)
 					<tr>
 						<td>{{$paqu->id}}</td>
-						
+						<td>{{$paqu->nomb}}</td>
 						<td>{{$paqu->desc}}</td>
-						
+						<td>{{$paqu->numb}}</td>
 						<td>{{$paqu->prec}}</td>
 						<td><a href="{{URL::action('PaqueteController@edit',$paqu->id)}}"><button class="btn btn-info">Editar</button></a>
 						<a href="" data-target="#modal-delete-{{$paqu->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a></td>
