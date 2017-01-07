@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\ReservaFormRequest;
+use App\Http\Controllers\Session;
 use App\Reserva;
 use App\EspacioReserva;
 use App\ExhibicionReserva;
@@ -24,13 +25,14 @@ class ReservaController extends Controller
     public function __construct(){
 
     }
+    //private $id_hora;
     public function index(Request $request){
     	if ($request) {
     		$query=trim($request->get('searchText'));
     		$reservas=DB::table('reservas as r')
     		->join('institutos as i','r.id_instituto','=','i.id')
     		->join('users as u','r.id_usua','=','u.id')
-    		-select('r.id','r.fech','r.esta','i.nomb_inst','u.name')
+    		->select('r.id','r.fech','r.esta','i.nomb_inst','u.name')
     		->where('r.id','LIKE','%'.$query.'%')
     		->groupBy('r.id','r.fech','r.esta','i.nomb_inst','u.name')
     		->paginate(7);
@@ -41,16 +43,20 @@ class ReservaController extends Controller
     	$horas=DB::table('horas')->where('condicion','=','1')->get();
     	return view("adminlte::reserva.reserva.seleccionarHoras",["horas"=>$horas]);
     }
-    public function create(){
+    public function create(Request $request){
+
+    	$id_hora=$request->get('id_hora');
+    	///Session::put('id_hora', 'id_hora');
+    		$request->session()->put('id_hora', $id_hora);
     	$institutos=DB::table('institutos')->get();
     	$espacios=DB::table('espacios')->where('condicion','=','1')->get();
     	$exhibiciones=DB::table('exhibiciones')->where('condicion','=','1')->get();
     	$talleres=DB::table('talleres')->where('condicion','=','1')->get();
     	$paquetes=DB::table('paquete')->where('condicion','=','1')->get();
-    	return view("adminlte::reserva.reserva.create",["institutos"=>$institutos,"espacios"=>$espacios,"exhibiciones"=>$exhibiciones,"talleres"=>$talleres,"paquete"=>$paquetes]);
+    	return view("adminlte::reserva.reserva.create",["institutos"=>$institutos,"espacios"=>$espacios,"exhibiciones"=>$exhibiciones,"talleres"=>$talleres,"paquetes"=>$paquetes,"horas"=>$id_hora]);
     }
     public function store(ReservaFormRequest $request){
-    	try{
+    	//try{
     		DB::beginTransaction();
     		$reserva=new Reserva;
     		$reserva->alim=$request->get('alim');
@@ -69,6 +75,7 @@ class ReservaController extends Controller
     		$reserva->prec_adul=$request->get('prec_adul');
     		$reserva->id_usua=Auth::id();
     		$reserva->esta="RESERVADO";
+    		//$reserva->apro=1;
     		$mytime = Carbon::now('America/Lima');
     		$reserva->fech=$mytime->toDateTimeString();
     		$reserva->save();
@@ -102,8 +109,9 @@ class ReservaController extends Controller
     		}
 
     		//ESTO NOSE :V
-    		$id_hora=$request->get('id_hora');
+    		//$id_hora=$request->get('id_hora');
     		$cont_hora=0;
+    		$id_hora=$request->session()->get('id_hora');
     		while ($cont_hora<count($id_hora)) {
     			$hora_reserva = new HoraReserva();
     			$hora_reserva->id_reserva=$reserva->id;
@@ -112,7 +120,7 @@ class ReservaController extends Controller
     			$cont_hora=$cont_hora+1;
     		}
 
-    		$id_paquete-=$request->get('id_paquete');
+    		$id_paquete=$request->get('id_paquete');
     		$prec_paquete=$request->get('prec_paquete');
     		$desc_paquete=$request->get('desc_paquete');
     		$cant_paquete=$request->get('cant_paquete');
@@ -144,25 +152,31 @@ class ReservaController extends Controller
     			$cont_taller=$cont_taller+1;
     		}
     		DB::commit();
-    	}
-    	catch(\Exception $e){
-    		DB::rollback();
-    	}
+    	//}
+    	//catch(\Exception $e){
+    	//	DB::rollback();
+    	//}
     	return redirect('reserva')->with('message','Se ha guardado exitosamente');
     }
     public function show($id){
     	$reserva=DB::table('reservas as r')
     		->join('institutos as i','r.id_instituto','=','i.id')
     		->join('users as u','r.id_usua','=','u.id')
-    		-select('r.id','r.fech','r.esta','i.nomb_inst','u.name')
+    		->select('r.id','r.fech','r.esta','i.nomb_inst','u.name')
     		->where('r.id','=',$id)
-    		-first();
+    		->first();
 
     		$espacios=DB::table('espacio_reserva as er')
-    		->join('espacio as e','er.id_espacio','e.id')
-    		->select('e.nomb','')
+    		->join('espacios as e','er.id_espacio','e.id')
+    		->select('e.nomb')
     		->where('er.id_reserva','=',$id)
-    		-get();
+    		->get();
     		return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios]);
+    }
+    public function destroy($id){
+    	$reserva=Reserva::findOrFail($id);
+    	$reserva->esta='CANCELADO';
+    	$reserva->update();
+    	return redirect('reserva')->with('message','Se cancelado con exito la reserva');
     }
 }

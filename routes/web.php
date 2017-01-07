@@ -19,8 +19,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index');
+Route::get('/reserva/seleccionarHoras', 'ReservaController@seleccionarHoras');
+Route::resource('/reserva','ReservaController');
 Route::resource('/instituto','InstitutoController');
 Route::resource('/espacio','EspacioController');
 Route::resource('/taller','TallerController');

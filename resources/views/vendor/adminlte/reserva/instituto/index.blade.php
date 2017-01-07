@@ -9,10 +9,7 @@
 			@include('adminlte::reserva.instituto.search')
 		</div>	
 	</div>
-	<?php
-	echo Form::date('name', \Carbon\Carbon::now());
-	?>
-	<input type="date" name="capa" class="form-control" placeholder="Capacidad...">
+	
 	<div class="row">
 		<div class="=col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="table-responsive">
