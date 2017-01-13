@@ -3,6 +3,9 @@
 <!-- JQuery and bootstrap are required by Laravel 5.3 in resources/assets/js/bootstrap.js-->
 <!-- Laravel App -->
 <script src="{{ asset('/js/app.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/js/highcharts.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/js/graficas.js') }}" type="text/javascript"></script>
+@stack('scripts')
 
 <script src="{{ asset('/js/bootstrap-select.min.js') }}" type="text/javascript"></script>
 @stack('scripts')

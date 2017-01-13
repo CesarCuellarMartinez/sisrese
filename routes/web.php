@@ -32,3 +32,11 @@ Route::resource('/exhibicion','ExhibicionController');
 Route::resource('/paquete','PaqueteController');
 Route::resource('/hora','HoraController');
 Route::resource('/horario','HorarioController');
+Route::resource('/grafica','GraficasController@index');
+Route::get('grafica_registros/{anio}/{mes}', 'GraficasController@registros_mes');
+Route::get('grafica_reservas', 'GraficasController@total_reservaciones');
+
+Route::get('pdf', function(){
+	$pdf = PDF::loadView('viewpdf');
+	return $pdf->download('archivo.pdf');
+} );
