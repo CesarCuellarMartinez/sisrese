@@ -13,6 +13,9 @@
 Route::get('prueba', function(){
 	return "Hola desde routes.php";
 });
+Route::get('/nalgas', function () {
+   return view('adminlte::reserva/reserva/seleccionarHoras');
+});
 
 Route::get('/', function () {
     return redirect('/login');
