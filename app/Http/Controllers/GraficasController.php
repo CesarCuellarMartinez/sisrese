@@ -54,6 +54,8 @@ class GraficasController extends Controller
     }
 
 
+    
+
 
      public function total_reservaciones(){
         $institutos=Instituto::all();
@@ -61,6 +63,7 @@ class GraficasController extends Controller
         $cti=count($institutos);
         $reservaciones=Reserva::all();
         $ctr =count($reservaciones);
+        $this->prueba($cti,$ctr);
         
         /*Para llenar con 0 los espacios del array, en orden los id de los insitutos */
         for($i=0;$i<=$cti-1;$i++){
@@ -78,6 +81,13 @@ class GraficasController extends Controller
         return json_encode($data);
     }
 
+
+    public function prueba($cti2,$ctr2)
+    {
+        echo '<script type="text/javascript">alert("1-' . $cti2 . '")</script>';
+        
+        echo '<script type="text/javascript">alert("2.' . $ctr2 . '")</script>';
+    }
 
 
     public function index()

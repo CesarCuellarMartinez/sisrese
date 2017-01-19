@@ -19,7 +19,7 @@ function cargar_grafica_barras(anio,mes){
                 type: 'column'
             },
             title: {
-                text: 'Numero de Registros en el Mes'
+                text: 'Numero de Usuarios en el Mes'
             },
             subtitle: {
                 text: 'Source: plusis.net'
@@ -168,7 +168,7 @@ var options={
                 type: 'pie'
             },
             title: {
-                text: 'Grafica publicaciones'
+                text: 'Grafica Reservas'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
