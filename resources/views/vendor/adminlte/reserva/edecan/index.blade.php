@@ -31,7 +31,7 @@
 						
 						
 						<td><a href="{{URL::action('ReservaController@show',$rese->id)}}"><button class="btn btn-primary">Detalles</button></a>
-						<td><a href="{{URL::action('EdecanController@create', ['id'=>$rese->id])}}"><button class="btn btn-primary">Edecan</button></a>
+						<
 						<a href="" data-target="#modal-delete-{{$rese->id}}" data-toggle="modal"><button class="btn btn-danger">Cancelar</button></a></td>
 						
 					</tr>
