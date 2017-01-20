@@ -32,9 +32,9 @@ class ReservaController extends Controller
     		$reservas=DB::table('reservas as r')
     		->join('institutos as i','r.id_instituto','=','i.id')
     		->join('users as u','r.id_usua','=','u.id')
-    		->select('r.id','r.fech','r.esta','i.nomb_inst','u.name')
+    		->select('r.id','r.fech','r.esta','i.nomb_inst','u.name','edec')
     		->where('r.id','LIKE','%'.$query.'%')
-    		->groupBy('r.id','r.fech','r.esta','i.nomb_inst','u.name')
+    		->groupBy('r.id','r.fech','r.esta','i.nomb_inst','u.name','edec')
     		->paginate(7);
     		return view('adminlte::reserva.reserva.index',["reservas"=>$reservas,"searchText"=>$query]);
     	}

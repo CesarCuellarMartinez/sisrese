@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Input;
 use App\Http\Requests\EdecanFormRequest;
 use App\Http\Controllers\Session;
 use App\Edecan;
+use App\Reserva;
 use App\EspacioEdecan;
 use App\ExhibicionEdecan;
 use App\TallerEdecan;
@@ -63,6 +64,11 @@ class EdecanController extends Controller
     		//$reserva->apro=1;
     		
     		$edecan->save();
+
+            $reserva=Reserva::findOrFail($edecan->id_reserva);
+            $reserva->edec=('SI');
+
+            $reserva->update();
 
     		$id_espacio=$request->get('id_espacio');
     		$cant_espacio=$request->get('cant_espacio');
