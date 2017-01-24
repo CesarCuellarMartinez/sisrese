@@ -98,6 +98,17 @@ class GraficasController extends Controller
                ->with("anio",$anio)
                ->with("mes",$mes);
     }
+    public function index2()
+    {
+        $anio=date("Y");
+        $mes=date("m");
+        return view('adminlte::reserva.grafica.index2')
+               ->with("anio",$anio)
+               ->with("mes",$mes);
+    }
+
+
+
 
     /**
      * Show the form for creating a new resource.

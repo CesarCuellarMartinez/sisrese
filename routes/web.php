@@ -16,7 +16,9 @@ Route::get('prueba', function(){
 Route::get('/nalgas', function () {
    return view('adminlte::reserva/reserva/seleccionarHoras');
 });
-
+Route::get('/alv', function () {
+   return view('adminlte::reserva.grafica.index2',["anio"=>date("Y"),"mes"=>date("m")]);
+});
 Route::get('/', function () {
     return redirect('/login');
 });
@@ -33,7 +35,11 @@ Route::resource('/exhibicion','ExhibicionController');
 Route::resource('/paquete','PaqueteController');
 Route::resource('/hora','HoraController');
 Route::resource('/horario','HorarioController');
+Route::resource('/chart','ChartsController@area');
+Route::resource('/insti','ChartsController@total_reservaciones');
+Route::resource('/usua','ChartsController@reservaciones_usuarios');
 Route::resource('/grafica','GraficasController@index');
+Route::resource('/grafica/index2','GraficasController@index2');//por si acasox MAGE SI SOS PENDEJO
 Route::get('grafica_registros/{anio}/{mes}', 'GraficasController@registros_mes');
 Route::get('grafica_reservas', 'GraficasController@total_reservaciones');
 
