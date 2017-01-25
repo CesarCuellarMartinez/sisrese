@@ -70,6 +70,8 @@ desired effect
                     </div><!-- /.row -->
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
+              @yield('edecan')
+              @yield('taquilla')
             
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
