@@ -89,8 +89,12 @@ class ChartsController extends Controller
         
     }
 
+    
+
     public function reservaciones_usuarios(){
 
+        $anio=date("Y");
+        $mes=date("m");
         $usuarios=User::all();
         $ctu=count($usuarios);
 
@@ -126,7 +130,9 @@ class ChartsController extends Controller
         	]);
 
 
-		return view('adminlte::reserva.chart.usuarios',['lava' => $lava]);
+		return view('adminlte::reserva.chart.usuarios',['lava' => $lava])
+                ->with("anio",$anio)
+               ->with("mes",$mes);
 
         
     }
