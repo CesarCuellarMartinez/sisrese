@@ -13,7 +13,9 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-				<a href="{{URL::action('TallerController@destroy',$tall->id)}}"><button class="btn btn-info">Confirmar</button></a>
+				<a href="{{URL::action('TallerController@eli',$tall->id)}}"><button class="btn btn-info">
+				
+				Confirmar</button></a>
 			</div>
 		</div>
 	</div>

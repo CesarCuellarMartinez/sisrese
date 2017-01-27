@@ -56,4 +56,10 @@ class PaqueteController extends Controller
     	$paquete->updated();
     	return redirect('paquete')->with('message','Se ha eliminado exitosamente');
     }
+     public function eli($id){
+        $paquete=Paquete::findOrFail($id);
+        $paquete->condicion='0';
+        $paquete->update();
+        return redirect('paquete')->with('message','Se ha eliminado exitosamente');
+    }
 }

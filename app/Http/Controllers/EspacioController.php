@@ -54,4 +54,10 @@ class EspacioController extends Controller
     	$espacio->updated();
     	return redirect('espacio')->with('message','Se ha eliminado exitosamente');
     }
+    public function eli($id){
+        $espacio=Espacio::findOrFail($id);
+        $espacio->condicion='0';
+        $espacio->update();
+        return redirect('espacio')->with('message','Se ha eliminado exitosamente');
+    }
 }

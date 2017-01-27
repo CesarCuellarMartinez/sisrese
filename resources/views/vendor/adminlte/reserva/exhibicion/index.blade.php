@@ -30,7 +30,13 @@
 						<td>{{$exhi->prec}}</td>
 						<td><a href="{{URL::action('ExhibicionController@edit',$exhi->id)}}"><button class="btn btn-info">Editar</button></a>
 						<a href="" data-target="#modal-delete-{{$exhi->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a></td>
-						
+							@push('scripts')
+						<script>
+						$('#modal-delete-{{$exhi->id}}').appendTo("body");
+							$("#modal-delete-{{$exhi->id}}").css("z-index", "1500");
+							//$('#modal-delete-1').appendTo("body");
+						</script>
+						@endpush
 					</tr>
 					@include('adminlte::reserva.exhibicion.modal')
 					@endforeach

@@ -66,4 +66,10 @@ class TallerController extends Controller
         $taller->update();
         return redirect('taller')->with('message','Se ha eliminado exitosamente');
     }
+    public function eli($id){
+        $taller=Taller::findOrFail($id);
+        $taller->condicion='0';
+        $taller->update();
+        return redirect('taller')->with('message','Se ha eliminado exitosamente');
+    }
 }

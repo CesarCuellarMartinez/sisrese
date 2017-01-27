@@ -29,7 +29,13 @@
 
 						<td><a href="{{URL::action('EspacioController@edit',$espa->id)}}"><button class="btn btn-info">Editar</button></a>
 						<a href="" data-target="#modal-delete-{{$espa->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a></td>
-						
+							@push('scripts')
+						<script>
+						$('#modal-delete-{{$espa->id}}').appendTo("body");
+							$("#modal-delete-{{$espa->id}}").css("z-index", "1500");
+							//$('#modal-delete-1').appendTo("body");
+						</script>
+						@endpush
 					</tr>
 					@include('adminlte::reserva.espacio.modal')
 					@endforeach

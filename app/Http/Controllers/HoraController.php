@@ -63,4 +63,10 @@ class HoraController extends Controller
     	$hora->updated();
     	return redirect('hora')->with('message','Se ha eliminado exitosamente');
     }
+    public function eli($id){
+        $hora=Hora::findOrFail($id);
+        $hora->condicion='0';
+        $hora->update();
+        return redirect('hora')->with('message','Se ha eliminado exitosamente');
+    }
 }

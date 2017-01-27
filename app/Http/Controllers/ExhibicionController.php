@@ -56,4 +56,10 @@ class ExhibicionController extends Controller
     	$exhibicion->updated();
     	return redirect('exhibicion')->with('message','Se ha eliminado exitosamente');
     }
+     public function eli($id){
+        $exhibicion=Exhibicion::findOrFail($id);
+        $exhibicion->condicion='0';
+        $exhibicion->update();
+        return redirect('exhibicion')->with('message','Se ha eliminado exitosamente');
+    }
 }

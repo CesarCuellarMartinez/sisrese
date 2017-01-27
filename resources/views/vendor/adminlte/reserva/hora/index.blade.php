@@ -34,7 +34,13 @@
 						<td>{{$hor->hora_fina}}</td>
 						<td><a href="{{URL::action('HoraController@edit',$hor->id)}}"><button class="btn btn-info">Editar</button></a>
 						<a href="" data-target="#modal-delete-{{$hor->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a></td>
-						
+						@push('scripts')
+						<script>
+						$('#modal-delete-{{$hor->id}}').appendTo("body");
+							$("#modal-delete-{{$hor->id}}").css("z-index", "1500");
+							//$('#modal-delete-1').appendTo("body");
+						</script>
+						@endpush
 					</tr>
 					@include('adminlte::reserva.hora.modal')
 					@endforeach

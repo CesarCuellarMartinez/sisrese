@@ -47,7 +47,12 @@ Route::get('grafica_registros/{anio}/{mes}', 'GraficasController@registros_mes')
 Route::get('grafica_reservas', 'GraficasController@total_reservaciones');
 Route::get('/reserva/eli/{id}', 'ReservaController@eli');
 Route::get('/reserva/con/{id}', 'ReservaController@con');
-
+Route::get('/taller/eli/{id}', 'TallerController@eli');
+Route::get('/instituto/eli/{id}', 'InstitutoController@eli');
+Route::get('/espacio/eli/{id}', 'EspacioController@eli');
+Route::get('/exhibicion/eli/{id}', 'ExhibicionController@eli');
+Route::get('/paquete/eli/{id}', 'PaqueteController@eli');
+Route::get('/hora/eli/{id}', 'HoraController@eli');
 Route::get('pdf', function(){
 	$pdf = PDF::loadView('ReservaController@index');
 	return $pdf->download('archivo.pdf');

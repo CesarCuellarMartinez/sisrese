@@ -13,7 +13,9 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-				<button type="submit" class="btn btn-primary">Confirmar</button>
+				<a href="{{URL::action('EspacioController@eli',$espa->id)}}"><button class="btn btn-info">
+								Confirmar</button></a>
+
 			</div>
 		</div>
 	</div>

@@ -57,7 +57,13 @@ class InstitutoController extends Controller
     public function destroy($id){
     	$instituto=Instituto::findOrFail($id);
     	$instituto->condicion='0';
-    	$instituto->updated();
+    	$instituto->update();
     	return redirect('instituto')->with('message','Se ha eliminado exitosamente');
+    }
+    public function eli($id){
+        $instituto=Instituto::findOrFail($id);
+        $instituto->condicion='0';
+        $instituto->update();
+        return redirect('instituto')->with('message','Se ha eliminado exitosamente');
     }
 }

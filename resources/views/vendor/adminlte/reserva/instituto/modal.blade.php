@@ -13,7 +13,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-				<button type="submit" class="btn btn-primary">Confirmar</button>
+				<a href="{{URL::action('InstitutoController@eli',$inst->id)}}"><button class="btn btn-info">
 			</div>
 		</div>
 	</div>

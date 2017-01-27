@@ -30,7 +30,13 @@
 						<td>{{$paqu->prec}}</td>
 						<td><a href="{{URL::action('PaqueteController@edit',$paqu->id)}}"><button class="btn btn-info">Editar</button></a>
 						<a href="" data-target="#modal-delete-{{$paqu->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a></td>
-						
+						@push('scripts')
+						<script>
+						$('#modal-delete-{{$paqu->id}}').appendTo("body");
+							$("#modal-delete-{{$paqu->id}}").css("z-index", "1500");
+							//$('#modal-delete-1').appendTo("body");
+						</script>
+						@endpush
 					</tr>
 					@include('adminlte::reserva.paquete.modal')
 					@endforeach
