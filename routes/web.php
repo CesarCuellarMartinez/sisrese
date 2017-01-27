@@ -27,10 +27,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::get('/reserva/seleccionarHoras', 'ReservaController@seleccionarHoras');
 Route::resource('/reserva','ReservaController');
+//Route::resource('/reserva/eli','ReservaController@eli');
 Route::resource('/edecan','EdecanController');
 Route::resource('/instituto','InstitutoController');
 Route::resource('/espacio','EspacioController');
 Route::resource('/taller','TallerController');
+Route::resource('/taller/destroy','TallerController@destroy');
 Route::resource('/exhibicion','ExhibicionController');
 Route::resource('/paquete','PaqueteController');
 Route::resource('/hora','HoraController');
@@ -40,9 +42,11 @@ Route::resource('/insti','ChartsController@total_reservaciones');
 Route::resource('/cantiRes','ChartsController@cantidad_reservas');
 Route::resource('/usua','ChartsController@reservaciones_usuarios_mes');
 Route::resource('/grafica','GraficasController@index');
-Route::resource('/grafica/index2','GraficasController@index2');//por si acasox MAGE SI SOS PENDEJO
+Route::resource('/grafica/index2','GraficasController@index2');
 Route::get('grafica_registros/{anio}/{mes}', 'GraficasController@registros_mes');
 Route::get('grafica_reservas', 'GraficasController@total_reservaciones');
+Route::get('/reserva/eli/{id}', 'ReservaController@eli');
+Route::get('/reserva/con/{id}', 'ReservaController@con');
 
 Route::get('pdf', function(){
 	$pdf = PDF::loadView('viewpdf');

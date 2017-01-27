@@ -2,7 +2,9 @@
 @section('encabezado')
 	Lista de Talleres <a href="taller/create"><button class="btn btn-success">Nuevo</button></a>
 @endsection
+@section('mensajes')
 {{ Session::get('message') }}
+@endsection
 @section('main-content')
 	<div class="row">
 		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
@@ -30,13 +32,24 @@
 						<td>{{$tall->prec}}</td>
 						<td><a href="{{URL::action('TallerController@edit',$tall->id)}}"><button class="btn btn-info">Editar</button></a>
 						<a href="" data-target="#modal-delete-{{$tall->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a></td>
-						
+						@push('scripts')
+						<script>
+						$('#modal-delete-{{$tall->id}}').appendTo("body");
+							$("#modal-delete-{{$tall->id}}").css("z-index", "1500");
+							//$('#modal-delete-1').appendTo("body");
+						</script>
+						@endpush
 					</tr>
 					@include('adminlte::reserva.taller.modal')
+					
 					@endforeach
 				</table>
 			</div>
 			{{$talleres->render()}}
 		</div>
 	</div>
+	@push('scripts')
+						
+						@endpush
+					
 @endsection

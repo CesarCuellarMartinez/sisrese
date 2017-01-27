@@ -44,6 +44,7 @@ desired effect
 
         <!-- Main content -->
         <section class="content">
+        @yield('mensajes')
             <!-- Your Page Content Here -->
             <div class="row">
             <div class="col-md-12">

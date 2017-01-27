@@ -38,6 +38,13 @@
 						
 					</tr>
 					@include('adminlte::reserva.instituto.modal')
+					@push('scripts')
+						<script>
+						$('#modal-delete-{{$inst->id}}').appendTo("body");
+							$("#modal-delete-{{$inst->id}}").css("z-index", "1500");
+							//$('#modal-delete-1').appendTo("body");
+						</script>
+						@endpush
 					@endforeach
 				</table>
 			</div>

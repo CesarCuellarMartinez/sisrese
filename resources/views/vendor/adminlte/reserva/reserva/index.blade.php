@@ -9,6 +9,7 @@
 			@include('adminlte::reserva.reserva.search')
 		</div>	
 	</div>
+
 	<div class="row">
 		<div class="=col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="table-responsive">
@@ -30,14 +31,35 @@
 						<td>{{$rese->esta}}</td>
 						
 						
-						<td><a href="{{URL::action('ReservaController@show',$rese->id)}}"><button class="btn btn-primary">Detalles</button></a>
-						@if($rese->edec=="NO")
-							<a href="{{URL::action('EdecanController@create', ['id'=>$rese->id])}}"><button class="btn btn-primary">Edecan</button></a>
+						<td><a href="{{URL::action('ReservaController@show',['id'=>$rese->id])}}"><button class="btn btn-primary">Detalles</button></a>
+						@if($rese->id_usua==$id_usua AND $rese->esta=='RESERVADO')
+							<a href="" data-target="#modal-confirm-{{$rese->id}}" data-toggle="modal"><button class="btn btn-danger">Confirmar</button></a>
+		
+								
+
 						@endif
-						<a href="" data-target="#modal-delete-{{$rese->id}}" data-toggle="modal"><button class="btn btn-danger">Cancelar</button></a></td>
+						@if($rese->edec=="NO" AND $rese->esta=='CONFIRMADO')
+							<a href="{{URL::action('EdecanController@create', ['id'=>$rese->id])}}"><button class="btn btn-primary">Edecan</button></a>
+							
+
+						@endif
+						@if($rese->id_usua==$id_usua AND $rese->esta!='CANCELADO')
+							<a href="" data-target="#modal-delete-{{$rese->id}}" data-toggle="modal"><button class="btn btn-danger">Cancelar</button></a></td>
+							@push('scripts')
+								<script>
+								$('#modal-delete-{{$rese->id}}').appendTo("body");
+									$("#modal-delete-{{$rese->id}}").css("z-index", "1500");
+									//$('#modal-delete-1').appendTo("body");
+								$('#modal-confirm-{{$rese->id}}').appendTo("body");
+									$("#modal-confirm-{{$rese->id}}").css("z-index", "1500");
+									//$('#modal-delete-1').appendTo("body");
+								</script>
+							@endpush
+						@endif
 						
 					</tr>
 					@include('adminlte::reserva.reserva.modal')
+					@include('adminlte::reserva.reserva.modal2')
 					@endforeach
 				</table>
 			</div>

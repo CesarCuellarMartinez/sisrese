@@ -1,4 +1,4 @@
-<div class="modal  modal-slide-in-rigth" aria-hidden="true" role="dialog" tabindex="-1" id="modal-delete-{{$tall->id}}">
+<div class="modal fade modal-slide-in-rigth" aria-hidden="true" role="dialog" tabindex="-1" id="modal-delete-{{$tall->id}}">
 	{{Form::Open(array('action'=>array('TallerController@destroy',$tall->id),'method'=>'delete'))}}
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -13,7 +13,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-				<button type="submit" class="btn btn-primary">Confirmar</button>
+				<a href="{{URL::action('TallerController@destroy',$tall->id)}}"><button class="btn btn-info">Confirmar</button></a>
 			</div>
 		</div>
 	</div>

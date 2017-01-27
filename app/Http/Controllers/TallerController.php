@@ -14,11 +14,18 @@ class TallerController extends Controller
 
     }
     public function index(Request $request){
+        $req =$request->get('fantasma');
+        if (is_null($req)) {
+            $a="entro";
+        }
+        else{
+            $a="no entro";
+        }
     	if ($request) {
     		$query=trim($request->get('searchText'));
     		$talleres =DB::table('talleres')->where('nomb','LIKE','%'.$query.'%')->where('condicion','=','1')->orderBy('id','desc')->paginate(7);
             //Este view si es la absoluta dentro de carpetas
-    		return view('adminlte::reserva.taller.index',["talleres"=>$talleres,"searchText"=>$query]);
+    		return view('adminlte::reserva.taller.index',["talleres"=>$talleres,"searchText"=>$query,"req"=>$req,"a"=>$a]);
     	}
     }
     public function create(){
@@ -36,7 +43,10 @@ class TallerController extends Controller
     	return redirect('taller')->with('message','Se ha guardado exitosamente');
     }
     public function show($id){
-    	return view("adminlte::reserva.taller.show",["taller"=>Taller::findOrFail($id)]);
+    	  $taller=Taller::findOrFail($id);
+        $taller->condicion='0';
+        $taller->update();
+        return redirect('taller')->with('message','Se ha eliminado exitosamente');
     }
     public function edit($id){
     	return view("adminlte::reserva.taller.edit",["taller"=>Taller::findOrFail($id)]);
@@ -52,8 +62,8 @@ class TallerController extends Controller
     }
     public function destroy($id){
     	$taller=Taller::findOrFail($id);
-    	$taller->condicion='0';
-    	$taller->updated();
-    	return redirect('taller')->with('message','Se ha eliminado exitosamente');
+        $taller->condicion='0';
+        $taller->update();
+        return redirect('taller')->with('message','Se ha eliminado exitosamente');
     }
 }

@@ -36,11 +36,12 @@ class ReservaController extends Controller
     		$reservas=DB::table('reservas as r')
     		->join('institutos as i','r.id_instituto','=','i.id')
     		->join('users as u','r.id_usua','=','u.id')
-    		->select('r.id','r.fech','r.esta','i.nomb_inst','u.name','edec')
+    		->select('r.id','r.fech','r.esta','i.nomb_inst','u.name','edec','u.id as id_usua')
     		->where('r.id','LIKE','%'.$query.'%')
-    		->groupBy('r.id','r.fech','r.esta','i.nomb_inst','u.name','edec')
+    		->groupBy('r.id','r.fech','r.esta','i.nomb_inst','u.name','edec','u.id')
     		->paginate(7);
-    		return view('adminlte::reserva.reserva.index',["reservas"=>$reservas,"searchText"=>$query]);
+             $id_usua=Auth::id();
+    		return view('adminlte::reserva.reserva.index',["reservas"=>$reservas,"searchText"=>$query,"id_usua"=>$id_usua]);
     	}
     }
     public function seleccionarHoras(){
@@ -163,18 +164,19 @@ class ReservaController extends Controller
     	return redirect('reserva')->with('message','Se ha guardado exitosamente');
     }
     public function show($id){
-    	$reserva=DB::table('reservas as r')
-    		->join('institutos as i','r.id_instituto','=','i.id')
-    		->join('users as u','r.id_usua','=','u.id')
-    		->select('r.id','r.fech','r.esta','i.nomb_inst','u.name')
-    		->where('r.id','=',$id)
-    		->first();
 
-    		$espacios=DB::table('espacio_reserva as er')
-    		->join('espacios as e','er.id_espacio','e.id')
-    		->select('e.nomb','e.capa','er.cant')
-    		->where('er.id_reserva','=',$id)
-    		->get();
+            $reserva=DB::table('reservas as r')
+            ->join('institutos as i','r.id_instituto','=','i.id')
+            ->join('users as u','r.id_usua','=','u.id')
+            ->select('r.id','r.fech','r.esta','i.nomb_inst','u.name')
+            ->where('r.id','=',$id)
+            ->first();
+
+            $espacios=DB::table('espacio_reserva as er')
+            ->join('espacios as e','er.id_espacio','e.id')
+            ->select('e.nomb','e.capa','er.cant')
+            ->where('er.id_reserva','=',$id)
+            ->get();
             $talleres=DB::table('taller_reserva as tr')
             ->join('talleres as t','tr.id_taller','t.id')
             ->select('t.nomb','t.capa','tr.cant','tr.prec','tr.desc')
@@ -213,12 +215,23 @@ class ReservaController extends Controller
                 return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"exhibiciones"=>$exhibiciones]);
             }      
 
-    		
     }
     public function destroy($id){
     	$reserva=Reserva::findOrFail($id);
-    	$reserva->esta='CANCELADO';
-    	$reserva->update();
-    	return redirect('reserva')->with('message','Se cancelado con exito la reserva');
+        $reserva->esta='CANCELADO';
+        $reserva->update();
+        return redirect('reserva')->with('message','Se cancelado con exito la reserva');
+    }
+    public function eli($id){
+        $reserva=Reserva::findOrFail($id);
+        $reserva->esta='CANCELADO';
+        $reserva->update();
+        return redirect('reserva')->with('message','Se cancelado con exito la reserva');
+    }
+    public function con($id){
+        $reserva=Reserva::findOrFail($id);
+        $reserva->esta='CONFIRMADO';
+        $reserva->update();
+        return redirect('reserva')->with('message','Se cancelado con exito la reserva');
     }
 }
