@@ -1,7 +1,7 @@
 @extends('adminlte::layouts.app')
 @section('encabezado')
 	Reserva ID: {{$reserva->id}}
-	<a href="paquete/create"><button class="btn btn-success">Generar Reporte</button></a>
+	<a href="{{URL::action('ChartsController@pdf',['id'=>$reserva->id])}}"><button class="btn btn-primary">Generar Reporte</button></a>
 @endsection
 {{ Session::get('message') }}
 @section('main-content')

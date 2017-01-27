@@ -16,6 +16,27 @@ use Illuminate\Support\Facades\Redirect;
 
 use DB;
 use Khill\Lavacharts\Lavacharts;
+use Illuminate\Support\Facades\Input;
+use App\Http\Requests\ReservaFormRequest;
+use App\Http\Controllers\Session;
+
+use App\EspacioReserva;
+use App\ExhibicionReserva;
+use App\HoraReserva;
+use App\PaqueteReserva;
+use App\TallerReserva;
+use App\Edecan;
+use App\EspacioEdecan;
+use App\ExhibicionEdecan;
+use App\TallerEdecan;
+
+use PDF;
+
+
+use Carbon\Carbon;
+use Response;
+use Auth;
+use Illuminate\Support\Collection;
 
 class ChartsController extends Controller
 {
@@ -349,6 +370,65 @@ class ChartsController extends Controller
                 
 
 
+        
+    }
+
+    public function pdf($id)
+    {
+      $reserva=DB::table('reservas as r')
+            ->join('institutos as i','r.id_instituto','=','i.id')
+            ->join('users as u','r.id_usua','=','u.id')
+            ->select('r.id','r.fech','r.esta','i.nomb_inst','u.name')
+            ->where('r.id','=',$id)
+            ->first();
+
+            $espacios=DB::table('espacio_reserva as er')
+            ->join('espacios as e','er.id_espacio','e.id')
+            ->select('e.nomb','e.capa','er.cant')
+            ->where('er.id_reserva','=',$id)
+            ->get();
+            $talleres=DB::table('taller_reserva as tr')
+            ->join('talleres as t','tr.id_taller','t.id')
+            ->select('t.nomb','t.capa','tr.cant','tr.prec','tr.desc')
+            ->where('tr.id_reserva','=',$id)
+            ->get();
+            $exhibiciones=DB::table('exhibicion_reserva as er')
+            ->join('exhibiciones as e','er.id_exhibicion','e.id')
+            ->select('e.nomb','e.capa','er.cant','er.prec','er.desc')
+            ->where('er.id_reserva','=',$id)
+            ->get();
+
+            if (Edecan::where('id_reserva', '=', $id)->count() > 0) {
+                $edecan = DB::table('edecanes as e')
+                ->join('users as u','e.id_usua','=','u.id')
+                ->select('e.id','e.fech', 'e.come', 'u.name','e.cant_prof','e.cant_nino','e.cant_adul')
+                ->where('e.id_reserva','=',$id)
+                ->first();
+                $espacios_edecan=DB::table('espacio_edecan as ee')
+                ->join('espacios as e','ee.id_espacio','e.id')
+                ->select('e.nomb','e.capa','ee.cant')
+                ->where('ee.id_edecan','=',$edecan->id)
+                ->get();
+                $talleres_edecan=DB::table('taller_edecan as te')
+                ->join('talleres as t','te.id_taller','t.id')
+                ->select('t.nomb','t.capa','te.cant')
+                ->where('te.id_edecan','=',$edecan->id)
+                ->get();
+                $exhibiciones_edecan=DB::table('exhibicion_edecan as ee')
+                ->join('exhibiciones as e','ee.id_exhibicion','e.id')
+                ->select('e.nomb','e.capa','ee.cant')
+                ->where('ee.id_edecan','=',$edecan->id)
+                ->get();
+                $pdf = PDF::loadView('adminlte::reserva.chart.pdfres',["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"exhibiciones"=>$exhibiciones,"espacios_edecan"=>$espacios_edecan,"talleres_edecan"=>$talleres_edecan,"exhibiciones_edecan"=>$exhibiciones_edecan,"edecan"=>$edecan]);
+                return $pdf->download('archivo.pdf');
+                
+            }
+            else{
+
+                $pdf = PDF::loadView('adminlte::reserva.chart.pdfres',["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"exhibiciones"=>$exhibiciones]);
+                return $pdf->download('archivo.pdf');
+
+            }      
         
     }
 }
