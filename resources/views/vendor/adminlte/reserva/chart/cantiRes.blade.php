@@ -1,6 +1,6 @@
 @extends('adminlte::layouts.app')
 @section('encabezado')
-	Lista de Chart 
+	Reservaciones por mes
 @endsection
 {{ Session::get('message') }}
 @section('main-content')
