@@ -5,7 +5,9 @@
 {{ Session::get('message') }}
 @section('main-content')
 	
-{!!Form::open(array('url'=>'insti','method'=>'POST','autocomplete'=>'off'))!!}
+	
+	
+{!!Form::open(array('url'=>'cantiRes','method'=>'POST','autocomplete'=>'off'))!!}
 			{{Form::token()}}
 
 	<div  class="row" >
@@ -34,20 +36,22 @@
 			<button class="btn btn-primary" type="submit">Generar</button>
 		</div>
 	</div>
-</div>
+
 
 {!!Form::close()!!}
 
 
-	<div class="row">
-		<div class="=col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	
+		<div class="=col-lg-12 col-md-12	 col-sm-12 col-xs-12">
 			
 			<div id="pop_div2"></div>
 			
 				
-				{!! $lava->render('BarChart', 'reservados', 'pop_div2') !!}
+				{!! $lava->render('PieChart', 'reservaciones', 'pop_div2') !!}
 				
 		</div>
 	</div>
+
+
 
 @endsection

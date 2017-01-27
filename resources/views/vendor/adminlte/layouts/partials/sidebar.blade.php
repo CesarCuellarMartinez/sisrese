@@ -50,6 +50,7 @@
                     <li><a href="{{ URL::to('chart')}}"><i class="fa fa-circle-o"></i>Primera</a></li>
                     <li><a href="{{ URL::to('insti')}}"><i class="fa fa-circle-o"></i>Instituto</a></li>
                     <li><a href="{{ URL::to('usua')}}"><i class="fa fa-circle-o"></i>Usuarios</a></li>
+                    <li><a href="{{ URL::to('cantiRes')}}"><i class="fa fa-circle-o"></i>Cantidad Reservaciones</a></li>
                     
                 </ul>
             </li>

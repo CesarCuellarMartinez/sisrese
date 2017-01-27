@@ -1,6 +1,6 @@
 @extends('adminlte::layouts.app')
 @section('encabezado')
-	Lista de Reservas <a href="reserva/create"><button class="btn btn-success">Nuevo</button></a>
+	Lista de Reservas <a href="reserva/seleccionarHoras"><button class="btn btn-success">Nuevo</button></a>
 @endsection
 {{ Session::get('message') }}
 @section('main-content')

@@ -5,23 +5,15 @@
 {{ Session::get('message') }}
 @section('main-content')
 	
-	<div class="row">
-		<div class="=col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			
-			<div id="pop_div"></div>
-				
-				{!! $lava->render('PieChart', 'promo', 'pop_div') !!}
-				
-		</div>
-
-	</div>
-
+	
+{!!Form::open(array('url'=>'usua','method'=>'POST','autocomplete'=>'off'))!!}
+			{{Form::token()}}
 <?php $nombremes=array("","ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"); ?>
 	<div  class="row" >
 <div class="col-lg-6 col-sm-6 col-xs-12">
 	<div class="form-group">
                   <label>Año</label>
-                  <select class="form-control" id="anio_sel"  onchange="cambiar_fecha_grafica();" name="anio_sel">
+                  <select class="form-control" id="anio_sel"  name="anio_sel">
 
                   <?php  echo '<option value="'.$anio.'" >'.$anio.'</option>';   ?>
                     <option value="2016" >2016</option>
@@ -43,7 +35,7 @@
 <div class="col-lg-6 col-sm-6 col-xs-12"	>
 	<div class="form-group">
                   <label>Mes</label>
-                  <select class="form-control" id="mes_sel" onchange="cambiar_fecha_grafica();" name="mes_sel">
+                  <select class="form-control" id="mes_sel"  name="mes_sel">
                   <?php  echo '<option value="'.$mes.'" >'.$nombremes[intval($mes)].'</option>';   ?>
                     <option value="1">ENERO</option>
                     <option value="2">FEBRERO</option>
@@ -61,9 +53,24 @@
                   </select>
      </div>             
 </div>
+	<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+		<div class="form-group">
+			<button class="btn btn-primary" type="submit">Generar</button>
+		</div>
+	</div>
 </div>
 
+{!!Form::close()!!}
+<div class="row">
+		<div class="=col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			
+			<div id="pop_div2"></div>
+				
+				{!! $lavaT->render('BarChart', 'promo_mes', 'pop_div2') !!}
+				
+		</div>
 
+	</div>
 
 	
 				

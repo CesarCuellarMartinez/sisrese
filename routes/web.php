@@ -37,7 +37,8 @@ Route::resource('/hora','HoraController');
 Route::resource('/horario','HorarioController');
 Route::resource('/chart','ChartsController@area');
 Route::resource('/insti','ChartsController@total_reservaciones');
-Route::resource('/usua','ChartsController@reservaciones_usuarios');
+Route::resource('/cantiRes','ChartsController@cantidad_reservas');
+Route::resource('/usua','ChartsController@reservaciones_usuarios_mes');
 Route::resource('/grafica','GraficasController@index');
 Route::resource('/grafica/index2','GraficasController@index2');//por si acasox MAGE SI SOS PENDEJO
 Route::get('grafica_registros/{anio}/{mes}', 'GraficasController@registros_mes');
