@@ -49,6 +49,6 @@ Route::get('/reserva/eli/{id}', 'ReservaController@eli');
 Route::get('/reserva/con/{id}', 'ReservaController@con');
 
 Route::get('pdf', function(){
-	$pdf = PDF::loadView('viewpdf');
+	$pdf = PDF::loadView('ReservaController@index');
 	return $pdf->download('archivo.pdf');
 } );

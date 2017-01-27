@@ -312,9 +312,8 @@ class ChartsController extends Controller
            if($fecha == $anio)
            {
             $numeroMes[intval($mes)]++;
-            $ani=$fecha;
-            $dos = $anio;
-            $mensaje=$numeroMes[intval($mes)];
+           
+            
 
            }
         
@@ -345,9 +344,9 @@ class ChartsController extends Controller
 
 
     return view('adminlte::reserva.chart.cantiRes',['lava' => $lava])
-                ->with("anio",$anio)
+                ->with("anio",$anio);
                 
-                ->with("mensaje",$mensaje);
+                
 
 
         
