@@ -5,6 +5,122 @@
 @endsection
 {{ Session::get('message') }}
 @section('main-content')
+<di class="row">
+<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+		<div class="form-group">
+			<label for="nomb_inst">Estado:</label>
+			<p>{{$reserva->esta}}</p>
+		</div>
+	</div>
+	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+		<div class="form-group">
+			<label for="nomb_cont">Usuario:</label>
+			<p>{{$reserva->name}}</p>
+		</div>
+	</div>
+	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+		<div class="form-group">
+			<label for="nomb_inst">Nombre Instituto:</label>
+			<p>{{$reserva->nomb_inst}}</p>
+		</div>
+	</div>
+	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+		<div class="form-group">
+			<label for="nomb_cont">Nombre Contacto:</label>
+			<p>{{$reserva->nomb_cont}}</p>
+		</div>
+	</div>
+	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+		<div class="form-group">
+			<label for="corr_cont">Corre Contacto:</label>
+			<p>{{$reserva->corr_cont}}</p>
+		</div>
+	</div>
+	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+		<div class="form-group">
+			<label for="tele_cont">Telefono Contacto:</label>
+			<p>{{$reserva->tele_cont}}</p>
+		</div>
+	</div>
+	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+		<div class="form-group">
+			<label for="tele_cont">Cantidad niños:</label>
+			<p>{{$reserva->cant_nino}}</p>
+		</div>
+	</div>
+	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+		<div class="form-group">
+			<label for="tele_cont">Cantidad adultos:</label>
+			<p>{{$reserva->cant_adul}}</p>
+		</div>
+	</div>
+	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+		<div class="form-group">
+			<label for="tele_cont">Cantidad profesores:</label>
+			<p>{{$reserva->cant_prof}}</p>
+		</div>
+	</div>
+	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+		<div class="form-group">
+			<label for="tele_cont">Precio niños:</label>
+			<p>{{$reserva->prec_nino}}</p>
+		</div>
+	</div>
+	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+		<div class="form-group">
+			<label for="tele_cont">Precio adultos:</label>
+			<p>{{$reserva->prec_adul}}</p>
+		</div>
+	</div>
+	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+		<div class="form-group">
+			<label for="tele_cont">Precio profesores:</label>
+			<p>{{$reserva->prec_prof}}</p>
+		</div>
+	</div>
+	<div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+		<div class="form-group">
+			<label for="corr_cont">Fecha Reservada:</label>
+			<p>{{$reserva->fech_rese}}</p>
+		</div>
+	</div>
+	<div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+		<div class="form-group">
+			<label for="tele_cont">Fecha de reservacion:</label>
+			<p>{{$reserva->fech}}</p>
+		</div>
+	</div>
+	<div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+		<div class="form-group">
+			<label for="tele_cont">Comentario:</label>
+			<p>{{$reserva->come}}</p>
+		</div>
+	</div>
+</di>
+		<div class="panel panel-primary">
+			<div class="panel-body">
+			<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+					<div class="form-group">
+						<label>Horas</label>
+					</div>
+				</div>
+				<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+					<table id="detalles_espacio" class="table table-striped table-bordered table-condesed table-hover">
+						<thead style="background-color:#A9D0F5">
+							<th>Hora Inicial</th>
+							<th>Hora Final</th>
+						</thead>
+						@foreach($horas as $hora)
+							<tr>
+								<td>{{$hora->hora_inic}}</td>
+								<td>{{$hora->hora_fina}}</td>
+							</tr>
+						@endforeach
+
+					</table>
+				</div>
+			</div>
+		</div>
 		<div class="panel panel-primary">
 			<div class="panel-body">
 			<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
@@ -114,6 +230,44 @@
                     <div class="row">
                         <div class="col-md-12">
                                   <!--Contenido-->
+                                  <div class="row">
+                                  	<div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+										<div class="form-group">
+											<label for="nomb_inst">Nombre Usuario:</label>
+											<p>{{$edecan->name}}</p>
+										</div>
+									</div>
+									<div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+										<div class="form-group">
+											<label for="nomb_inst">Fecha Datos:</label>
+											<p>{{$edecan->fech}}</p>
+										</div>
+									</div>
+									<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+										<div class="form-group">
+											<label for="nomb_inst">Cantidad niños:</label>
+											<p>{{$edecan->cant_nino}}</p>
+										</div>
+									</div>
+									<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+										<div class="form-group">
+											<label for="nomb_inst">Cantidad Adultos:</label>
+											<p>{{$edecan->cant_adul}}</p>
+										</div>
+									</div>
+									<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+										<div class="form-group">
+											<label for="nomb_inst">Cantidad Profesores:</label>
+											<p>{{$edecan->cant_prof}}</p>
+										</div>
+									</div>
+									<div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+										<div class="form-group">
+											<label for="nomb_inst">Comentarios:</label>
+											<p>{{$edecan->come}}</p>
+										</div>
+									</div>
+                                  </div>
                               <div class="panel panel-primary">
 								<div class="panel-body">
 								<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">

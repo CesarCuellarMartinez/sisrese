@@ -168,7 +168,7 @@ class ReservaController extends Controller
             $reserva=DB::table('reservas as r')
             ->join('institutos as i','r.id_instituto','=','i.id')
             ->join('users as u','r.id_usua','=','u.id')
-            ->select('r.id','r.fech','r.esta','i.nomb_inst','u.name')
+            ->select('r.id','r.fech','r.esta','i.nomb_inst','i.nomb_cont','i.corr_cont','i.tele_cont','u.name','r.alim','r.apro','r.cant_adul','r.cant_nino','r.cant_prof','r.come','r.prec_adul','r.prec_nino','r.prec_prof','r.fech_rese','r.info_cont','r.nomb_cont')
             ->where('r.id','=',$id)
             ->first();
 
@@ -186,6 +186,11 @@ class ReservaController extends Controller
             ->join('exhibiciones as e','er.id_exhibicion','e.id')
             ->select('e.nomb','e.capa','er.cant','er.prec','er.desc')
             ->where('er.id_reserva','=',$id)
+            ->get();
+            $horas=DB::table('hora_reserva as hr')
+            ->join('horas as h','hr.id_hora','h.id')
+            ->select('h.hora_inic','h.hora_fina')
+            ->where('hr.id_reserva','=',$id)
             ->get();
 
             if (Edecan::where('id_reserva', '=', $id)->count() > 0) {
@@ -209,10 +214,10 @@ class ReservaController extends Controller
                 ->select('e.nomb','e.capa','ee.cant')
                 ->where('ee.id_edecan','=',$edecan->id)
                 ->get();
-                return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"exhibiciones"=>$exhibiciones,"espacios_edecan"=>$espacios_edecan,"talleres_edecan"=>$talleres_edecan,"exhibiciones_edecan"=>$exhibiciones_edecan,"edecan"=>$edecan]);
+                return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"exhibiciones"=>$exhibiciones,"espacios_edecan"=>$espacios_edecan,"talleres_edecan"=>$talleres_edecan,"exhibiciones_edecan"=>$exhibiciones_edecan,"edecan"=>$edecan,"horas"=>$horas]);
             }
             else{
-                return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"exhibiciones"=>$exhibiciones]);
+                return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"exhibiciones"=>$exhibiciones,"horas"=>$horas]);
             }      
 
     }
