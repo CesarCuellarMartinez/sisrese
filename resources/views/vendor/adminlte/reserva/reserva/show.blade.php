@@ -208,7 +208,36 @@
 			</div>
 		</div>
 		
-		
+		<div class="panel panel-primary">
+			<div class="panel-body">
+			<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+					<div class="form-group">
+						<label>Paquetes</label>
+					</div>
+				</div>
+				<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+					<table id="detalles_espacio" class="table table-striped table-bordered table-condesed table-hover">
+						<thead style="background-color:#A9D0F5">
+							<th>Nombre</th>
+							<th>Capacidad</th>
+							<th>Cantidad</th>
+							<th>Precio</th>
+							<th>Descuento</th>
+						</thead>
+						@foreach($paquetes as $paqu)
+							<tr>
+								<td>{{$paqu->nomb}}</td>
+								<td>{{$paqu->numb}}</td>
+								<td>{{$paqu->cant}}</td>
+								<td>{{$paqu->prec}}</td>
+								<td>{{$paqu->desc}}</td>
+							</tr>
+						@endforeach
+
+					</table>
+				</div>
+			</div>
+		</div>
 
 
 @endsection
@@ -346,6 +375,7 @@
 									</div>
 								</div>
 							</div>
+
                                   <!--Fin Contenido-->
                            </div>
                         </div>

@@ -14,6 +14,7 @@
 					</ul>
 				</div>
 			@endif
+			<?php var_dump($exhibiciones_horas); ?>
 			{!!Form::open(array('url'=>'reserva','method'=>'POST','autocomplete'=>'off'))!!}
 			<div class="form-group">
 				<label for="inst">Instituto</label>
@@ -37,10 +38,7 @@
 				<label for="desc">Descuento</label>
 				<input type="number" name="desc" class="form-control" placeholder="Descuento...">
 			</div>
-			<div class="form-group">
-				<label for="fech_rese">Fecha Reserva</label>
-				<input type="date" name="fech_rese" class="form-control" >
-			</div>
+			
 			<div class="form-group">
 				<label for="cant_adul">Cantidad Adultos</label>
 				<input type="number" name="cant_adul" class="form-control" placeholder="Adultos...">
@@ -556,4 +554,132 @@
 		}
 	</script>
 	@endpush
+@endsection
+@section('horas')
+			<div class="row">
+            <div class="col-md-12">
+              <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Resumen horas</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                @foreach($exhibiciones_horas as $exho)
+                    <div class="row">
+                        <div class="col-md-12">
+                                  <!--Contenido-->
+                              <div class="panel panel-primary">
+								<div class="panel-body">
+								<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+										<div class="form-group">
+											<label>Exhibiciones</label>
+										</div>
+									</div>
+									<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+										<table id="detalles_espacio" class="table table-striped table-bordered table-condesed table-hover">
+											<thead style="background-color:#A9D0F5">
+												<th>Hora Inicio</th>
+												<th>Hora Fin</th>
+												<th>Fecha</th>
+												<th>Nombre Lugar</th>
+												<th>Personas</th>
+											</thead>
+											@foreach($exho as $datos)
+												<tr>
+													<td>{{$datos->hora_inic}}</td>
+													<td>{{$datos->hora_fina}}</td>
+													<td>{{$datos->fech_rese}}</td>
+													<td>{{$datos->nombre}}</td>
+													<td>{{$datos->personas}}</td>
+												</tr>
+											
+											@endforeach
+										</table>
+									</div>
+								</div>
+							</div>
+							@endforeach
+							@foreach($talleres_horas as $taho)
+			                    <div class="row">
+			                        <div class="col-md-12">
+			                                  <!--Contenido-->
+			                              <div class="panel panel-primary">
+											<div class="panel-body">
+											<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+													<div class="form-group">
+														<label>Talleres</label>
+													</div>
+												</div>
+												<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+													<table id="detalles_espacio" class="table table-striped table-bordered table-condesed table-hover">
+														<thead style="background-color:#A9D0F5">
+															<th>Hora Inicio</th>
+															<th>Hora Fin</th>
+															<th>Fecha</th>
+															<th>Nombre Lugar</th>
+															<th>Personas</th>
+														</thead>
+														@foreach($taho as $datos)
+															<tr>
+																<td>{{$datos->hora_inic}}</td>
+																<td>{{$datos->hora_fina}}</td>
+																<td>{{$datos->fech_rese}}</td>
+																<td>{{$datos->nombre}}</td>
+																<td>{{$datos->personas}}</td>
+															</tr>
+														
+														@endforeach
+													</table>
+												</div>
+											</div>
+										</div>
+								@endforeach
+								@foreach($espacios_horas as $esho)
+			                    <div class="row">
+			                        <div class="col-md-12">
+			                                  <!--Contenido-->
+			                              <div class="panel panel-primary">
+											<div class="panel-body">
+											<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+													<div class="form-group">
+														<label>Espacios</label>
+													</div>
+												</div>
+												<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+													<table id="detalles_espacio" class="table table-striped table-bordered table-condesed table-hover">
+														<thead style="background-color:#A9D0F5">
+															<th>Hora Inicio</th>
+															<th>Hora Fin</th>
+															<th>Fecha</th>
+															<th>Nombre Lugar</th>
+															<th>Personas</th>
+														</thead>
+														@foreach($esho as $datos)
+															<tr>
+																<td>{{$datos->hora_inic}}</td>
+																<td>{{$datos->hora_fina}}</td>
+																<td>{{$datos->fech_rese}}</td>
+																<td>{{$datos->nombre}}</td>
+																<td>{{$datos->personas}}</td>
+															</tr>
+														
+														@endforeach
+													</table>
+												</div>
+											</div>
+										</div>
+								@endforeach
+                                  <!--Fin Contenido-->
+                           </div>
+                        </div>
+                            
+                        </div>
+                    </div><!-- /.row -->
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
 @endsection

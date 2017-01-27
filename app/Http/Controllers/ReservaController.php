@@ -51,14 +51,25 @@ class ReservaController extends Controller
     public function create(Request $request){
 
     	$id_hora=$request->get('id_hora');
+        $fecha=$request->get('fech_rese');
     	///Session::put('id_hora', 'id_hora');
-    		$request->session()->put('id_hora', $id_hora);
+        $cont_hora=0;
+            while ($cont_hora<count($id_hora)) {
+                   $exhibiciones_horas[$cont_hora] = DB::select( DB::raw("SELECT rese.fech_rese,exhibiciones.nomb as 'nombre',SUM(exre.cant) as 'personas', horas.hora_inic,horas.hora_fina FROM reservas as rese inner join hora_reserva ON rese.id = hora_reserva.id_reserva inner join horas on horas.id = hora_reserva.id_hora inner join exhibicion_reserva as exre on exre.id_reserva = rese.id RIGHT JOIN exhibiciones on exhibiciones.id = exre.id_exhibicion WHERE horas.id = :a AND rese.fech_rese = :b  group by rese.fech_rese, exhibiciones.nomb, horas.hora_inic, horas.hora_fina"), array('a' => $id_hora[$cont_hora],'b'=>$fecha  ));
+                   $talleres_horas[$cont_hora] = DB::select( DB::raw("SELECT rese.fech_rese,espacios.nomb as 'nombre' ,SUM(esre.cant) as 'presonas', horas.hora_inic,horas.hora_fina from reservas as rese inner join hora_reserva on rese.id = hora_reserva.id_reserva inner join horas on horas.id = hora_reserva.id_hora inner join espacio_reserva as esre on esre.id_reserva = rese.id right join espacios on espacios.id = esre.id_espacio where horas.id =:a and rese.fech_rese=:b group by rese.fech_rese, espacios.nomb,horas.hora_inic, horas.hora_fina"), array('a' => $id_hora[$cont_hora],'b'=>$fecha  ));
+                   $espacios_horas[$cont_hora] = DB::select( DB::raw("SELECT rese.fech_rese, talleres.nomb as 'nombre' ,SUM(tare.cant) as 'personas', horas.hora_inic,horas.hora_fina from reservas as rese inner join hora_reserva on rese.id = hora_reserva.id_reserva inner join horas on horas.id = hora_reserva.id_hora inner join taller_reserva as tare on tare.id_reserva = rese.id right join talleres on talleres.id = tare.id_taller where horas.id =:a and rese.fech_rese=:b group by rese.fech_rese, talleres.nomb, horas.hora_inic, horas.hora_fina"), array('a' => $id_hora[$cont_hora],'b'=>$fecha  ));
+
+                $cont_hora=$cont_hora+1;
+            }
+     
+    		$request->session()->put('id_hora',$id_hora);
+            $request->session()->put('fecha',$fecha);
     	$institutos=DB::table('institutos')->get();
     	$espacios=DB::table('espacios')->where('condicion','=','1')->get();
     	$exhibiciones=DB::table('exhibiciones')->where('condicion','=','1')->get();
     	$talleres=DB::table('talleres')->where('condicion','=','1')->get();
     	$paquetes=DB::table('paquete')->where('condicion','=','1')->get();
-    	return view("adminlte::reserva.reserva.create",["institutos"=>$institutos,"espacios"=>$espacios,"exhibiciones"=>$exhibiciones,"talleres"=>$talleres,"paquetes"=>$paquetes,"horas"=>$id_hora]);
+    	return view("adminlte::reserva.reserva.create",["institutos"=>$institutos,"espacios"=>$espacios,"exhibiciones"=>$exhibiciones,"talleres"=>$talleres,"paquetes"=>$paquetes,"horas"=>$id_hora,"espacios_horas"=>$espacios_horas,"talleres_horas"=>$talleres_horas,"exhibiciones_horas"=>$exhibiciones_horas]);
     }
     public function store(ReservaFormRequest $request){
     	//try{
@@ -72,7 +83,7 @@ class ReservaController extends Controller
     		$reserva->id_instituto=$request->get('id_instituto');
     		$reserva->come=$request->get('come');
     		$reserva->desc=$request->get('desc');
-    		$reserva->fech_rese=$request->get('fech_rese');
+    		$reserva->fech_rese=$request->session()->get('fecha');
     		$reserva->info_cont=$request->get('info_cont');
     		$reserva->nomb_cont=$request->get('nomb_cont');
     		$reserva->prec_nino=$request->get('prec_nino');
@@ -187,6 +198,11 @@ class ReservaController extends Controller
             ->select('e.nomb','e.capa','er.cant','er.prec','er.desc')
             ->where('er.id_reserva','=',$id)
             ->get();
+            $paquetes=DB::table('paquete_reserva as pr')
+            ->join('paquete as p','pr.id_paquete','p.id')
+            ->select('p.nomb','p.numb','pr.cant','pr.prec','pr.desc')
+            ->where('pr.id_reserva','=',$id)
+            ->get();
             $horas=DB::table('hora_reserva as hr')
             ->join('horas as h','hr.id_hora','h.id')
             ->select('h.hora_inic','h.hora_fina')
@@ -214,10 +230,10 @@ class ReservaController extends Controller
                 ->select('e.nomb','e.capa','ee.cant')
                 ->where('ee.id_edecan','=',$edecan->id)
                 ->get();
-                return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"exhibiciones"=>$exhibiciones,"espacios_edecan"=>$espacios_edecan,"talleres_edecan"=>$talleres_edecan,"exhibiciones_edecan"=>$exhibiciones_edecan,"edecan"=>$edecan,"horas"=>$horas]);
+                return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"espacios_edecan"=>$espacios_edecan,"talleres_edecan"=>$talleres_edecan,"exhibiciones_edecan"=>$exhibiciones_edecan,"edecan"=>$edecan,"horas"=>$horas]);
             }
             else{
-                return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"exhibiciones"=>$exhibiciones,"horas"=>$horas]);
+                return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"horas"=>$horas]);
             }      
 
     }

@@ -7,7 +7,10 @@
 	{!!Form::open(array('url'=>'reserva/create','method' => 'get'))!!}
 		<div class="panel panel-primary">
 			<div class="panel-body">
-			
+				<div class="form-group">
+					<label for="fech_rese">Fecha Reserva</label>
+					<input type="date" name="fech_rese" class="form-control" >
+				</div>
 				<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
 					<div class="form-group">
 						<label>Hora</label>

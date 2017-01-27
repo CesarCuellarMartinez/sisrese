@@ -73,6 +73,7 @@ desired effect
               </div><!-- /.box -->
               @yield('edecan')
               @yield('taquilla')
+              @yield('horas')
             
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
