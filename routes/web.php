@@ -54,6 +54,8 @@ Route::get('/espacio/eli/{id}', 'EspacioController@eli');
 Route::get('/exhibicion/eli/{id}', 'ExhibicionController@eli');
 Route::get('/paquete/eli/{id}', 'PaqueteController@eli');
 Route::get('/hora/eli/{id}', 'HoraController@eli');
+Route::resource('evento','EventoController@api');
+Route::get('api','EventoController@api'); //ruta que nos devuelve los eventos en formato json
 Route::get('pdf2', function(){
 	$pdf = PDF::loadView('adminlte::reserva.reserva.show');
 	return $pdf->download('archivo.pdf');

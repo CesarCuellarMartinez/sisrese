@@ -7,7 +7,10 @@
 
     <link href="{{ asset('/css/all.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css" />
-    
+    <link href="{{ asset('fullcalendar/fullcalendar.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('fullcalendar/fullcalendar.print.css') }}" rel="stylesheet" type="text/css" media="print" />
+    <link href="{{ asset('fullcalendar/lib/cupertino/jquery-ui.min.css') }}" rel="stylesheet" type="text/css" />
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

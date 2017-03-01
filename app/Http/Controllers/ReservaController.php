@@ -19,6 +19,7 @@ use App\Edecan;
 use App\EspacioEdecan;
 use App\ExhibicionEdecan;
 use App\TallerEdecan;
+use App\Hora;
 use DB;
 use Carbon\Carbon;
 use Response;
@@ -51,13 +52,16 @@ class ReservaController extends Controller
     public function create(Request $request){
 
     	$id_hora=$request->get('id_hora');
+        $horario=Hora::findOrFail($id_hora[0]);
         $fecha=$request->get('fech_rese');
     	///Session::put('id_hora', 'id_hora');
         $cont_hora=0;
             while ($cont_hora<count($id_hora)) {
-                   $exhibiciones_horas[$cont_hora] = DB::select( DB::raw("SELECT rese.fech_rese,exhibiciones.nomb as 'nombre',SUM(exre.cant) as 'personas', horas.hora_inic,horas.hora_fina FROM reservas as rese inner join hora_reserva ON rese.id = hora_reserva.id_reserva inner join horas on horas.id = hora_reserva.id_hora inner join exhibicion_reserva as exre on exre.id_reserva = rese.id RIGHT JOIN exhibiciones on exhibiciones.id = exre.id_exhibicion WHERE horas.id = :a AND rese.fech_rese = :b  group by rese.fech_rese, exhibiciones.nomb, horas.hora_inic, horas.hora_fina"), array('a' => $id_hora[$cont_hora],'b'=>$fecha  ));
-                   $talleres_horas[$cont_hora] = DB::select( DB::raw("SELECT rese.fech_rese,espacios.nomb as 'nombre' ,SUM(esre.cant) as 'presonas', horas.hora_inic,horas.hora_fina from reservas as rese inner join hora_reserva on rese.id = hora_reserva.id_reserva inner join horas on horas.id = hora_reserva.id_hora inner join espacio_reserva as esre on esre.id_reserva = rese.id right join espacios on espacios.id = esre.id_espacio where horas.id =:a and rese.fech_rese=:b group by rese.fech_rese, espacios.nomb,horas.hora_inic, horas.hora_fina"), array('a' => $id_hora[$cont_hora],'b'=>$fecha  ));
-                   $espacios_horas[$cont_hora] = DB::select( DB::raw("SELECT rese.fech_rese, talleres.nomb as 'nombre' ,SUM(tare.cant) as 'personas', horas.hora_inic,horas.hora_fina from reservas as rese inner join hora_reserva on rese.id = hora_reserva.id_reserva inner join horas on horas.id = hora_reserva.id_hora inner join taller_reserva as tare on tare.id_reserva = rese.id right join talleres on talleres.id = tare.id_taller where horas.id =:a and rese.fech_rese=:b group by rese.fech_rese, talleres.nomb, horas.hora_inic, horas.hora_fina"), array('a' => $id_hora[$cont_hora],'b'=>$fecha  ));
+                   $exhibiciones_horas[$cont_hora] = DB::select( DB::raw("SELECT rese.fech_rese,exhibiciones.nomb as 'nombre',SUM(exre.cant) as 'personas', horas.hora_inic,horas.hora_fina, (exhibiciones.capa-SUM(exre.cant)) as 'disponibles' FROM reservas as rese inner join hora_reserva ON rese.id = hora_reserva.id_reserva inner join horas on horas.id = hora_reserva.id_hora inner join exhibicion_reserva as exre on exre.id_reserva = rese.id RIGHT JOIN exhibiciones on exhibiciones.id = exre.id_exhibicion WHERE horas.id = :a AND rese.fech_rese = :b  group by rese.fech_rese, exhibiciones.nomb, horas.hora_inic, horas.hora_fina,exhibiciones.capa"), array('a' => $id_hora[$cont_hora],'b'=>$fecha  ));
+                   $espacios_horas[$cont_hora] = DB::select( DB::raw("SELECT rese.fech_rese,espacios.nomb as 'nombre' ,SUM(esre.cant) as 'presonas', horas.hora_inic,horas.hora_fina, (espacios.capa-SUM(esre.cant)) as 'disponibles' from reservas as rese inner join hora_reserva on rese.id = hora_reserva.id_reserva inner join horas on horas.id = hora_reserva.id_hora inner join espacio_reserva as esre on esre.id_reserva = rese.id right join espacios on espacios.id = esre.id_espacio where horas.id =:a and rese.fech_rese=:b group by rese.fech_rese, espacios.nomb,horas.hora_inic, horas.hora_fina,espacios.capa"), array('a' => $id_hora[$cont_hora],'b'=>$fecha  ));
+                   $talleres_horas[$cont_hora] = DB::select( DB::raw("SELECT rese.fech_rese, talleres.nomb as 'nombre' ,SUM(tare.cant) as 'personas', horas.hora_inic,horas.hora_fina, (talleres.capa-SUM(tare.cant)) as 'disponibles' from reservas as rese inner join hora_reserva on rese.id = hora_reserva.id_reserva inner join horas on horas.id = hora_reserva.id_hora inner join taller_reserva as tare on tare.id_reserva = rese.id right join talleres on talleres.id = tare.id_taller where horas.id =:a and rese.fech_rese=:b group by rese.fech_rese, talleres.nomb, horas.hora_inic, horas.hora_fina,talleres.capa"), array('a' => $id_hora[$cont_hora],'b'=>$fecha  ));
+                   
+                   $personas_horas[$cont_hora] = DB::select( DB::raw("SELECT rese.fech_rese ,SUM(rese.cant_adul) as 'adultos',SUM(rese.cant_nino) as 'ninos',SUM(rese.cant_prof) as 'profesores',(SUM(rese.cant_adul)+SUM(rese.cant_nino)+SUM(rese.cant_prof)) as 'total', horas.hora_inic,horas.hora_fina FROM reservas as rese inner join hora_reserva ON rese.id = hora_reserva.id_reserva inner join horas on horas.id = hora_reserva.id_hora WHERE horas.id = :a AND rese.fech_rese = :b  group by rese.fech_rese, horas.hora_inic, horas.hora_fina"), array('a' => $id_hora[$cont_hora],'b'=>$fecha  ));
 
                 $cont_hora=$cont_hora+1;
             }
@@ -69,7 +73,7 @@ class ReservaController extends Controller
     	$exhibiciones=DB::table('exhibiciones')->where('condicion','=','1')->get();
     	$talleres=DB::table('talleres')->where('condicion','=','1')->get();
     	$paquetes=DB::table('paquete')->where('condicion','=','1')->get();
-    	return view("adminlte::reserva.reserva.create",["institutos"=>$institutos,"espacios"=>$espacios,"exhibiciones"=>$exhibiciones,"talleres"=>$talleres,"paquetes"=>$paquetes,"horas"=>$id_hora,"espacios_horas"=>$espacios_horas,"talleres_horas"=>$talleres_horas,"exhibiciones_horas"=>$exhibiciones_horas]);
+    	return view("adminlte::reserva.reserva.create",["institutos"=>$institutos,"espacios"=>$espacios,"exhibiciones"=>$exhibiciones,"talleres"=>$talleres,"paquetes"=>$paquetes,"horas"=>$id_hora,"espacios_horas"=>$espacios_horas,"talleres_horas"=>$talleres_horas,"exhibiciones_horas"=>$exhibiciones_horas,"personas_horas"=>$personas_horas,"fecha"=>$fecha,"horario"=>$horario]);
     }
     public function store(ReservaFormRequest $request){
     	//try{

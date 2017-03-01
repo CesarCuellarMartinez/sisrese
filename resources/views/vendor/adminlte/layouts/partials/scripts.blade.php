@@ -8,6 +8,10 @@
 
 
 <script src="{{ asset('/js/bootstrap-select.min.js') }}" type="text/javascript"></script>
+    <script src="{{asset('fullcalendar/lib/jquery-ui.min.js')}}"></script>
+    <script src="{{asset('fullcalendar/lib/moment.min.js')}}"></script>
+    <script src="{{asset('fullcalendar/fullcalendar.js')}}"></script>
+    <script src="{{asset('fullcalendar/locale-all.js')}}"></script>
 @stack('scripts')
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the
