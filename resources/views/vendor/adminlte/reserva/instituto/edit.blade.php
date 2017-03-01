@@ -21,6 +21,10 @@
 			{!!Form::model($instituto,['method'=>'PATCH','route'=>['instituto.update',$instituto->id]])!!}
 			{{Form::token()}}
 				<div class="form-group">
+					<label for="codi">Codigo instituto</label>
+					<input type="text" name="codi" class="form-control" value="{{$instituto->codi}}" placeholder="Codigo Instituto...">
+				</div>
+				<div class="form-group">
 					<label for="nomb_inst">Nombre instituto</label>
 					<input type="text" name="nomb_inst" class="form-control" value="{{$instituto->nomb_inst}}" placeholder="Nombre Instituto...">
 				</div>

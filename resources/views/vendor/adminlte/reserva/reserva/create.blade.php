@@ -130,7 +130,7 @@
 				<label for="inst">Instituto</label>
 				<select name="id_instituto" id="id_instituto" class="form-control selectpicker" data-live-search="true">
 					@foreach($institutos as $inst)
-						<option value="{{$inst->id}}">{{$inst->nomb_inst}}</option>
+						<option value="{{$inst->id}}">{{$inst->nomb_inst.'-'.$inst->codi}}</option>
 					@endforeach
 				</select>
 			</div>

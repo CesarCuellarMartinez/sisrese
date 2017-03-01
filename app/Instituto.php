@@ -15,7 +15,8 @@ class Instituto extends Model
 		'tele_cont',
 		'corr_inst',
 		'corr_cont',
-		'condicion'
+		'condicion',
+		'codi'
 	];
 	protected $guarded=[
 

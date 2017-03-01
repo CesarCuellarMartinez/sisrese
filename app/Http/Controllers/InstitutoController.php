@@ -16,7 +16,7 @@ class InstitutoController extends Controller
     public function index(Request $request){
     	if ($request) {
     		$query=trim($request->get('searchText'));
-    		$institutos =DB::table('institutos')->where('nomb_inst','LIKE','%'.$query.'%')->where('condicion','=','1')->orderBy('id','desc')->paginate(7);
+    		$institutos =DB::table('institutos')->where('codi','LIKE','%'.$query.'%')->where('condicion','=','1')->orderBy('id','desc')->paginate(7);
             //Este view si es la absoluta dentro de carpetas
     		return view('adminlte::reserva.instituto.index',["institutos"=>$institutos,"searchText"=>$query]);
     	}
@@ -32,6 +32,7 @@ class InstitutoController extends Controller
     	$instituto->corr_inst=$request->get('corr_inst');
     	$instituto->tele_inst=$request->get('tele_inst');
     	$instituto->tele_cont=$request->get('tele_cont');
+        $instituto->codi=$request->get('codi');
     	$instituto->condicion='1';
     	$instituto->save();
         //El redirect es con respecto al nombre que tiene en el enrutamiento
@@ -51,6 +52,7 @@ class InstitutoController extends Controller
     	$instituto->corr_inst=$request->get('corr_inst');
     	$instituto->tele_inst=$request->get('tele_inst');
     	$instituto->tele_cont=$request->get('tele_cont');
+        $instituto->codi=$request->get('codi');
     	$instituto->update();
     	return redirect('instituto')->with('message','Se ha actualizado exitosamente');
     }

@@ -16,6 +16,7 @@
 				<table class="table table-striped table-bordered table-condensed table-hover">
 					<thead>
 						<th>Id</th>
+						<th>Codigo</th>
 						<th>Instituto</th>
 						<th>Contacto</th>
 						<th>Tel. Contacto</th>
@@ -27,6 +28,7 @@
 					@foreach($institutos as $inst)
 					<tr>
 						<td>{{$inst->id}}</td>
+						<td>{{$inst->codi}}</td>
 						<td>{{$inst->nomb_inst}}</td>
 						<td>{{$inst->nomb_cont}}</td>
 						<td>{{$inst->tele_cont}}</td>

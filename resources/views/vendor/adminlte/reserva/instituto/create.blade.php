@@ -18,6 +18,10 @@
 			{!!Form::open(array('url'=>'instituto','method'=>'POST','autocomplete'=>'off'))!!}
 			{{Form::token()}}
 			<div class="form-group">
+				<label for="codi">Codigo instituto</label>
+				<input type="text" name="codi" class="form-control" placeholder="Codigo Instituto...">
+			</div>
+			<div class="form-group">
 				<label for="nomb_inst">Nombre instituto</label>
 				<input type="text" name="nomb_inst" class="form-control" placeholder="Nombre Instituto...">
 			</div>
