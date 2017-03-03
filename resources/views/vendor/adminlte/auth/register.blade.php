@@ -10,7 +10,7 @@
     <div id="app">
         <div class="register-box">
             <div class="register-logo">
-                <a href="{{ url('/home') }}"><b>Admin</b>LTE</a>
+                <a href="{{ url('/home') }}"><b>Admin</b>TIN</a>
             </div>
 
             @if (count($errors) > 0)
