@@ -17,25 +17,31 @@
 			<!--El url es de las rutas-->
 			{!!Form::open(array('url'=>'instituto','method'=>'POST','autocomplete'=>'off'))!!}
 			{{Form::token()}}
-			<div class="form-group">
+			<div class="row">
+			<div class="col-md-3">
 				<label for="codi">Codigo instituto</label>
 				<input type="text" name="codi" class="form-control" placeholder="Codigo Instituto...">
 			</div>
-			<div class="form-group">
+			<div class="col-lg-8">
 				<label for="nomb_inst">Nombre instituto</label>
 				<input type="text" name="nomb_inst" class="form-control" placeholder="Nombre Instituto...">
 			</div>
-			<div class="form-group">
+			</div>
+			<div class="row">
+			<div class="col-lg-10">
 				<label for="nomb_cont">Nobre Contacto</label>
 				<input type="text" name="nomb_cont" class="form-control" placeholder="Nombre Contacto...">
 			</div>
-			<div class="form-group">
+			</div>
+			<div class="row">
+			<div class="col-md-5">
 				<label for="tele_inst">Telefono instituto</label>
 				<input type="text" name="tele_inst" class="form-control" placeholder="Telefono Instituto...">
 			</div>
-			<div class="form-group">
+			<div class="col-md-5">
 				<label for="tele_cont">Telefono Contacto</label>
 				<input type="text" name="tele_cont" class="form-control" placeholder="Telefono Contacto...">
+			</div>
 			</div>
 			<div class="form-group">
 				<label for="corr_inst">Correo instituto</label>

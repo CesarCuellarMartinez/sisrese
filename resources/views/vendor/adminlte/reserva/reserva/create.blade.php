@@ -145,53 +145,67 @@
 		      				<input type="checkbox" name="bus" value="1"> Bus
 		    		</label>	
 			</div>
-		
-			<div class="form-group">
+			<div class="row">
+			<div class="col-xs-1">
 				<label for="desc">Descuento</label>
 				<input type="number" name="desc" class="form-control" placeholder="Descuento...">
 			</div>
-			
-			<div class="form-group">
+			</div>
+			<div class="row">
+			<div class="col-xs-1">
 				<label for="cant_adul">Cantidad Adultos</label>
 				<input type="number" name="cant_adul" class="form-control" placeholder="Adultos...">
 			</div>
-			<div class="form-group">
+			<div class="col-xs-1">
 				<label for="cant_prof">Cantidad Profesores</label>
 				<input type="number" name="cant_prof" class="form-control" placeholder="Profesores...">
 			</div>
-			<div class="form-group">
+			<div class="col-xs-1">
 				<label for="cant_nino">Cantidad Niños</label>
 				<input type="number" name="cant_nino" class="form-control" placeholder="Niños...">
 			</div>
-			<div class="form-group">
+			<!--</div>-->
+		
+			
+
+			<!--<div class="row">-->
+			<div class="col-xs-1">
 				<label for="prec_prof">Precio Profesores</label>
 				<input type="number" step="0.1" name="prec_prof" class="form-control" placeholder="Profesores...">
 			</div>
-			<div class="form-group">
-				<label for="prec_adul">Precio Adulto</label>
+			<div class="col-xs-1">
+				<label for="prec_adul">Precio Adultos</label>
 				<input type="number" step="0.1" name="prec_adul" class="form-control" placeholder="Adulto...">
 			</div>
-			<div class="form-group">
-				<label for="prec_nino">Precio Niño</label>
+			<div class="col-xs-1">
+				<label for="prec_nino">Precio Niños</label>
 				<input type="number" step="0.1" name="prec_nino" class="form-control" placeholder="Niño...">
 			</div>
-			<div class="form-group">
+			</div>
+			<div class="row">
+			<div class="col-lg-6">
 				<label for="nomb_cont">Nombre contacto</label>
 				<input type="text" name="nomb_cont" class="form-control" placeholder="Contacto...">
 			</div>
-			<div class="form-group">
+			</div>	
+			<div class="row">
+			<div class="col-lg-6">
 				<label for="info_cont">Informacion Contacto</label>
 				<textarea class="form-control" rows="3" name="info_cont" placeholder="Contacto..."></textarea>
 			</div>
-			<div class="form-group">
+			<div class="col-lg-6">
 				<label for="come">Comentario</label>
 				<textarea class="form-control" rows="3" name="come" placeholder="Comentario..."></textarea>
 			</div>
+			</div>
+			<br/>
+			<br/>
+			<br/>
 
 		<div class="panel panel-primary">
 			<div class="panel-body">
 			
-				<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+				<div class="col-lg-4 col-xs-4 col-xs-4 col-xs-4">
 					<div class="form-group">
 						<label>Espacios</label>
 						<select name="pid_espacio" class="form-control selectpicker" id="pid_espacio" data-live-search="true">

@@ -20,22 +20,27 @@
 
 			{!!Form::model($exhibicion,['method'=>'PATCH','route'=>['exhibicion.update',$exhibicion->id]])!!}
 			{{Form::token()}}
-				<div class="form-group">
+			<div class="row">
+				<div class="col-md-6">
 					<label for="nomb">Nombre Exhibicion</label>
 					<input type="text" name="nomb" class="form-control" value="{{$exhibicion->nomb}}" placeholder="Nombre Exhibicion...">
 				</div>
-				<div class="form-group">
-					<label for="desc">Descripcion</label>
-					<input type="text" name="desc" class="form-control" value="{{$exhibicion->desc}}" placeholder="Descripcion...">
-				</div>
-				<div class="form-group">
+				<div class="col-xs-2">
 					<label for="capa">Capacidad</label>
 					<input type="number" name="capa" class="form-control" value="{{$exhibicion->capa}}" placeholder="Capacidad...">
 				</div>
-				<div class="form-group">
+				<div class="col-xs-2">
 					<label for="prec">Precio</label>
 					<input type="number" name="prec" step="0.01" class="form-control" value="{{$exhibicion->prec}}" placeholder="Precio...">
 				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-10">
+					<label for="desc">Descripcion</label>
+					<input type="text" name="desc" class="form-control" value="{{$exhibicion->desc}}" placeholder="Descripcion...">
+				</div>
+			</div>	
+			<br/>
 				<div class="form-group">
 					<button class="btn btn-primary" type="submit">Guardar</button>
 					<button class="btn btn-danger" type="reset">Cancelar</button>

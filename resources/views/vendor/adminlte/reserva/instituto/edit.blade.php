@@ -20,25 +20,31 @@
 
 			{!!Form::model($instituto,['method'=>'PATCH','route'=>['instituto.update',$instituto->id]])!!}
 			{{Form::token()}}
-				<div class="form-group">
+			<div class="">
+				<div class="col-xs-3">
 					<label for="codi">Codigo instituto</label>
 					<input type="text" name="codi" class="form-control" value="{{$instituto->codi}}" placeholder="Codigo Instituto...">
 				</div>
-				<div class="form-group">
+				<div class="co-md-8">
 					<label for="nomb_inst">Nombre instituto</label>
 					<input type="text" name="nomb_inst" class="form-control" value="{{$instituto->nomb_inst}}" placeholder="Nombre Instituto...">
 				</div>
-				<div class="form-group">
+			</div>	
+			<div>
+				<div class="col-lg-11">
 					<label for="nomb_cont">Nobre Contacto</label>
 					<input type="text" name="nomb_cont" class="form-control" value="{{$instituto->nomb_cont}}" placeholder="Nombre Contacto...">
 				</div>
-				<div class="form-group">
+			</div>
+			<div class="row">
+				<div class="col-md-5">
 					<label for="tele_inst">Telefono instituto</label>
 					<input type="text" name="tele_inst" class="form-control" value="{{$instituto->tele_inst}}" placeholder="Telefono Instituto...">
 				</div>
-				<div class="form-group">
+				<div class="col-md--5">
 					<label for="tele_cont">Telefono Contacto</label>
 					<input type="text" name="tele_cont" class="form-control" value="{{$instituto->tele_cont}}" placeholder="Telefono Contacto...">
+				</div>
 				</div>
 				<div class="form-group">
 					<label for="corr_inst">Correo instituto</label>

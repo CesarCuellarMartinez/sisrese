@@ -20,17 +20,22 @@
 
 			{!!Form::model($espacio,['method'=>'PATCH','route'=>['espacio.update',$espacio->id]])!!}
 			{{Form::token()}}
-				<div class="form-group">
+			<div class="row">
+			<div class="col-md-6">
 					<label for="nomb">Nombre Espacio</label>
 					<input type="text" name="nomb" class="form-control" value="{{$espacio->nomb}}" placeholder="Nombre Espacio...">
 				</div>
-				<div class="form-group">
+				<div class="col-xs-2">
+					<label for="capa">Capacidad</label>
+					<input type="number" name="capa" class="form-control" value="{{$espacio->capa}}" placeholder="Capacidad...">
+				</div>
+				</div>
+				
+				<div class="row">
+				<div class="col-lg-8">
 					<label for="desc">Descripcion</label>
 					<input type="text" name="desc" class="form-control" value="{{$espacio->desc}}" placeholder="Descripcion...">
 				</div>
-				<div class="form-group">
-					<label for="capa">Capacidad</label>
-					<input type="number" name="capa" class="form-control" value="{{$espacio->capa}}" placeholder="Capacidad...">
 				</div>
 				<div class="form-group">
 					<button class="btn btn-primary" type="submit">Guardar</button>

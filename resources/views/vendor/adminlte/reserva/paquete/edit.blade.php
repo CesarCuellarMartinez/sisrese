@@ -20,21 +20,26 @@
 
 			{!!Form::model($paquete,['method'=>'PATCH','route'=>['paquete.update',$paquete->id]])!!}
 			{{Form::token()}}
-				<div class="form-group">
+			<div class="row">
+			<div class="col-md-6">
 				<label for="nomb">Nombre</label>
 				<input type="text" name="nomb" class="form-control" value="{{$paquete->nomb}}" placeholder="Nombre...">
 			</div>
-			<div class="form-group">
-				<label for="desc">Descripcion</label>
-				<input type="text" name="desc" class="form-control" value="{{$paquete->desc}}" placeholder="Descripcion...">
-			</div>
-			<div class="form-group">
+			<div class="col-xs-3">
 				<label for="prec">Precio</label>
 				<input type="number" name="prec" step="0.01" class="form-control" value="{{$paquete->prec}}" placeholder="Precio...">
 			</div>
-			<div class="form-group">
-				<label for="numb">Numero de personas</label>
+			
+			<div class="col-xs-3">
+				<label for="numb">N° de personas</label>
 				<input type="number" name="numb" class="form-control" value="{{$paquete->numb}}" placeholder="Numero...">
+			</div>
+			</div>
+			<div class="row">
+			<div class="col-lg-12">
+				<label for="desc">Descripcion</label>
+				<input type="text" name="desc" class="form-control" value="{{$paquete->desc}}" placeholder="Descripcion...">
+			</div>
 			</div>
 				
 				<div class="form-group">

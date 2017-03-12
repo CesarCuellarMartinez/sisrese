@@ -24,22 +24,24 @@
 			{{Form::token()}}
 				
 	<div class="row">
-		<div class="col-lg-6 col-sm-6 col-xs-12">
-			<div class="form-group">
+		<div class="col-md-5">
+			
 				<label for="hora_inic">Hora inicio</label>
 				<input type="time" required value="{{$hora->hora_inic}}" name="hora_inic" class="form-control" placeholder="Hora inicial...">
-			</div>
+			
 		</div>
 		
-		<div class="col-lg-6 col-sm-6 col-xs-12">
-			<div class="form-group">
+		
+		<div class="col-md-5">
+			
 				<label for="hora_fina">Hora Final</label>
 				<input type="time" required value="{{$hora->hora_fina}}" name="hora_fina" class="form-control" placeholder="Hora final...">
-			</div>
+			
 		</div>
 
-		<div class="col-lg-6 col-sm-6 col-xs-12">
-			<div class="form-group">
+		
+		<div class="col-md-5">
+			
 				<label>Horario</label>
 				<select name="id_horario" class="form-control">
 					@foreach ($horarios as $horari)
@@ -50,13 +52,14 @@
 						@endif
 					@endforeach
 				</select>
-			</div>	
+		
 		</div>
-		<div class="col-lg-6 col-sm-6 col-xs-12">
-			<div class="form-group">
+	
+		<div class="col-md-5">
+			
 				<button class="btn btn-primary" type="submit">Guardar</button>
 				<button class="btn btn-danger" type="reset">Cancelar</button>
-			</div>
+			
 		</div>
 	</div>
 			{!!Form::close()!!}
