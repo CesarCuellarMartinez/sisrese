@@ -33,7 +33,12 @@
         <ul class="sidebar-menu">
             <li class="header">{{ trans('adminlte_lang::message.header') }}</li>
             <!-- Optionally, you can add icons to the links -->
+            
             <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
+            
+            @if (Auth::user()->tipo == 1)
+           
+
             <li><a href="{{ URL::to('reserva')}}"><i class='fa fa-link'></i> <span>Reservas</span></a></li>
             <li><a href="{{ URL::to('instituto')}}"><i class='fa fa-link'></i> <span>Institutos</span></a></li>
              <li><a href="{{ URL::to('espacio')}}"><i class='fa fa-link'></i> <span>Espacios</span></a></li>
@@ -54,7 +59,29 @@
                     
                 </ul>
             </li>
+              @endif
+             @if (Auth::user()->tipo == 2)   
+             <li><a href="{{ URL::to('instituto')}}"><i class='fa fa-link'></i> <span>Institutos</span></a></li>    
+                 <li><a href="{{ URL::to('reserva')}}"><i class='fa fa-link'></i> <span>Reservas</span></a></li>
+
+             @endif
+             @if (Auth::user()->tipo == 3)
+             <li><a href="{{ URL::to('reserva')}}"><i class='fa fa-link'></i> <span>Reservas</span></a></li>  
+             <li><a href="{{ URL::to('instituto')}}"><i class='fa fa-link'></i> <span>Institutos</span></a></li>     
+                 <li><a href="{{ URL::to('taquilla')}}"><i class='fa fa-link'></i> <span>Taquilla</span></a></li>
+
+             @endif
+             @if (Auth::user()->tipo == 4)
+             <li><a href="{{ URL::to('reserva')}}"><i class='fa fa-link'></i> <span>Reservas</span></a></li>
+             <li><a href="{{ URL::to('instituto')}}"><i class='fa fa-link'></i> <span>Institutos</span></a></li>       
+                 <li><a href="{{ URL::to('edecan')}}"><i class='fa fa-link'></i> <span>edecan</span></a></li>
+
+             @endif
+
+
+
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
 </aside>
+

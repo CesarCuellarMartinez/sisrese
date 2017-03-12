@@ -1,9 +1,12 @@
 @extends('adminlte::layouts.app')
 @section('encabezado')
+@if (Auth::user()->tipo == 1)
 	Lista de Horas <a href="hora/create"><button class="btn btn-success">Nuevo</button></a>
+	@endif
 @endsection
 {{ Session::get('message') }}
 @section('main-content')
+@if (Auth::user()->tipo == 1)
 	<div class="row">
 		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 			@include('adminlte::reserva.hora.search')
@@ -49,4 +52,5 @@
 			{{$horas->render()}}
 		</div>
 	</div>
+	@endif
 @endsection

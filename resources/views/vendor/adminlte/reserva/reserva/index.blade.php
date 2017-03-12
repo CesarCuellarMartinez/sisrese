@@ -1,6 +1,8 @@
 @extends('adminlte::layouts.app')
 @section('encabezado')
+	@if (Auth::user()->tipo == 1 || Auth::user()->tipo == 2 )
 	Lista de Reservas <a href="reserva/seleccionarHoras"><button class="btn btn-success">Nuevo</button></a>
+	@endif
 @endsection
 {{ Session::get('message') }}
 @section('main-content')
@@ -32,6 +34,8 @@
 						
 						
 						<td><a href="{{URL::action('ReservaController@show',['id'=>$rese->id])}}"><button class="btn btn-primary">Detalles</button></a>
+						
+					@if (Auth::user()->tipo == 1 || Auth::user()->tipo == 2 )   	
 						@if($rese->id_usua==$id_usua AND $rese->esta=='RESERVADO')
 							<a href="" data-target="#modal-confirm-{{$rese->id}}" data-toggle="modal"><button class="btn btn-danger">Confirmar</button></a>
 		
@@ -56,6 +60,7 @@
 								</script>
 							@endpush
 						@endif
+					@endif
 						
 					</tr>
 					@include('adminlte::reserva.reserva.modal')

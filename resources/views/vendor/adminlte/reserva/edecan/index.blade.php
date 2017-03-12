@@ -1,9 +1,12 @@
 @extends('adminlte::layouts.app')
 @section('encabezado')
+	@if (Auth::user()->tipo == 1)
 	Lista de Reservas <a href="reserva/create"><button class="btn btn-success">Nuevo</button></a>
+	@endif
 @endsection
 {{ Session::get('message') }}
 @section('main-content')
+@if (Auth::user()->tipo == 1 || Auth::user()->tipo == 4)
 	<div class="row">
 		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 			@include('adminlte::reserva.reserva.search')
@@ -20,6 +23,7 @@
 						<th>Instituto</th>
 						<th>Usuario</th>
 						<th>Opciones</th>
+
 					</thead>
 					@foreach($reservas as $rese)
 					<tr>
@@ -42,4 +46,5 @@
 			{{$reservas->render()}}
 		</div>
 	</div>
+	@endif
 @endsection

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Taller;
+use App\User;
+use App\TipoUsuario;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\TallerFormRequest;
 use DB;
@@ -21,6 +23,13 @@ class TallerController extends Controller
         else{
             $a="no entro";
         }
+        /*$id1 = $request->session()->get('id');
+        $tipo = User::where('id', $id1)->get();
+
+        if($tipo != null) 
+        {
+             return redirect('instituto')->with('message', 'hola'.$id1.' h');
+        }*/
     	if ($request) {
     		$query=trim($request->get('searchText'));
     		$talleres =DB::table('talleres')->where('nomb','LIKE','%'.$query.'%')->where('condicion','=','1')->orderBy('id','desc')->paginate(7);
