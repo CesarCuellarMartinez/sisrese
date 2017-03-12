@@ -29,6 +29,7 @@ Route::get('/reserva/seleccionarHoras', 'ReservaController@seleccionarHoras');
 Route::resource('/reserva','ReservaController');
 //Route::resource('/reserva/eli','ReservaController@eli');
 Route::resource('/edecan','EdecanController');
+Route::resource('/taquilla','TaquillaController');
 Route::resource('/instituto','InstitutoController');
 Route::resource('/espacio','EspacioController');
 Route::resource('/taller','TallerController');

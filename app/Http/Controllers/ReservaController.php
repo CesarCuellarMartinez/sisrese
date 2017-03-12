@@ -16,6 +16,7 @@ use App\HoraReserva;
 use App\PaqueteReserva;
 use App\TallerReserva;
 use App\Edecan;
+use App\Taquilla;
 use App\EspacioEdecan;
 use App\ExhibicionEdecan;
 use App\TallerEdecan;
@@ -37,9 +38,9 @@ class ReservaController extends Controller
     		$reservas=DB::table('reservas as r')
     		->join('institutos as i','r.id_instituto','=','i.id')
     		->join('users as u','r.id_usua','=','u.id')
-    		->select('r.id','r.fech','r.esta','i.nomb_inst','u.name','edec','u.id as id_usua')
+    		->select('r.id','r.fech','r.esta','i.nomb_inst','u.name','edec','taqu','u.id as id_usua')
     		->where('r.id','LIKE','%'.$query.'%')
-    		->groupBy('r.id','r.fech','r.esta','i.nomb_inst','u.name','edec','u.id')
+    		->groupBy('r.id','r.fech','r.esta','i.nomb_inst','u.name','edec','taqu','u.id')
     		->paginate(7);
              $id_usua=Auth::id();
     		return view('adminlte::reserva.reserva.index',["reservas"=>$reservas,"searchText"=>$query,"id_usua"=>$id_usua]);
@@ -179,7 +180,8 @@ class ReservaController extends Controller
     	return redirect('reserva')->with('message','Se ha guardado exitosamente');
     }
     public function show($id){
-
+            $eedec=false;
+            $etaqu=false;
             $reserva=DB::table('reservas as r')
             ->join('institutos as i','r.id_instituto','=','i.id')
             ->join('users as u','r.id_usua','=','u.id')
@@ -234,7 +236,35 @@ class ReservaController extends Controller
                 ->select('e.nomb','e.capa','ee.cant')
                 ->where('ee.id_edecan','=',$edecan->id)
                 ->get();
-                return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"espacios_edecan"=>$espacios_edecan,"talleres_edecan"=>$talleres_edecan,"exhibiciones_edecan"=>$exhibiciones_edecan,"edecan"=>$edecan,"horas"=>$horas]);
+                $eedec=true;
+               
+            }
+            if (Taquilla::where('id_reserva', '=', $id)->count() > 0) {
+                $taquilla = DB::table('taquilla as t')
+                ->join('users as u','t.id_usua','=','u.id')
+                ->select('t.id','t.fech', 't.come', 'u.name','t.cant_prof','t.cant_nino','t.cant_adul','t.prec_prof','t.prec_nino','t.prec_adul')
+                ->where('t.id_reserva','=',$id)
+                ->first();
+                 $exhibiciones_taquilla=DB::table('exhibicion_taquilla as et')
+                ->join('exhibiciones as e','et.id_exhibicion','e.id')
+                ->select('e.nomb','e.capa','et.cant','et.prec','et.desc')
+                ->where('et.id_taquilla','=',$taquilla->id)
+                ->get();
+                $paquetes_taquilla=DB::table('paquete_taquilla as pt')
+                ->join('paquete as p','pt.id_paquete','p.id')
+                ->select('p.nomb','p.numb','pt.cant','pt.prec','pt.desc')
+                ->where('pt.id_taquilla','=',$taquilla->id)
+                ->get();
+                $etaqu=true;
+            }
+            if ($eedec && $etaqu) {
+               return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"espacios_edecan"=>$espacios_edecan,"talleres_edecan"=>$talleres_edecan,"exhibiciones_edecan"=>$exhibiciones_edecan,"edecan"=>$edecan,"horas"=>$horas,"exhibiciones_taquilla"=>$exhibiciones_taquilla,"paquetes_taquilla"=>$paquetes_taquilla,"taquilla"=>$taquilla]);
+            }
+            elseif ($edecan) {
+                 return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"espacios_edecan"=>$espacios_edecan,"talleres_edecan"=>$talleres_edecan,"exhibiciones_edecan"=>$exhibiciones_edecan,"edecan"=>$edecan,"horas"=>$horas]);
+            }
+            elseif ($etaqu) {
+                return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"exhibiciones_taquilla"=>$exhibiciones_taquilla,"paquetes_taquilla"=>$paquetes_taquilla,"taquilla"=>$taquilla,"horas"=>$horas]);
             }
             else{
                 return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"horas"=>$horas]);

@@ -47,6 +47,11 @@
 							
 
 						@endif
+						@if($rese->taqu=="NO" AND $rese->esta=='CONFIRMADO')
+							<a href="{{URL::action('TaquillaController@create', ['id'=>$rese->id])}}"><button class="btn btn-primary">Taquilla</button></a>
+							
+
+						@endif
 						@if($rese->id_usua==$id_usua AND $rese->esta!='CANCELADO')
 							<a href="" data-target="#modal-delete-{{$rese->id}}" data-toggle="modal"><button class="btn btn-danger">Cancelar</button></a></td>
 							@push('scripts')

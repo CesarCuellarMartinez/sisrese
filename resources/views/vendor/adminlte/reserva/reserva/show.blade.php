@@ -241,8 +241,155 @@
 
 
 @endsection
+@section('taquilla')
+		@if(isset($taquilla))
+			<div class="row">
+            <div class="col-md-12">
+              <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Taquilla</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                                  <!--Contenido-->
+                                  <div class="row">
+                                  	<div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+										<div class="form-group">
+											<label for="nomb_inst">Nombre Usuario:</label>
+											<p>{{$taquilla->name}}</p>
+										</div>
+									</div>
+									<div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+										<div class="form-group">
+											<label for="nomb_inst">Fecha Datos:</label>
+											<p>{{$taquilla->fech}}</p>
+										</div>
+									</div>
+									<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+										<div class="form-group">
+											<label for="nomb_inst">Cantidad niños:</label>
+											<p>{{$taquilla->cant_nino}}</p>
+										</div>
+									</div>
+									<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+										<div class="form-group">
+											<label for="nomb_inst">Cantidad Adultos:</label>
+											<p>{{$taquilla->cant_adul}}</p>
+										</div>
+									</div>
+									<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+										<div class="form-group">
+											<label for="nomb_inst">Cantidad Profesores:</label>
+											<p>{{$taquilla->cant_prof}}</p>
+										</div>
+									</div>
+									<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+										<div class="form-group">
+											<label for="nomb_inst">Precion niños:</label>
+											<p>{{$taquilla->prec_nino}}</p>
+										</div>
+									</div>
+									<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+										<div class="form-group">
+											<label for="nomb_inst">Precion Adultos:</label>
+											<p>{{$taquilla->prec_adul}}</p>
+										</div>
+									</div>
+									<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+										<div class="form-group">
+											<label for="nomb_inst">Precion Profesores:</label>
+											<p>{{$taquilla->prec_prof}}</p>
+										</div>
+									</div>
+									<div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+										<div class="form-group">
+											<label for="nomb_inst">Comentarios:</label>
+											<p>{{$taquilla->come}}</p>
+										</div>
+									</div>
+                                  </div>
+                             <div class="panel panel-primary">
+								<div class="panel-body">
+								<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+										<div class="form-group">
+											<label>Exhibiciones</label>
+										</div>
+									</div>
+									<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+										<table id="detalles_espacio" class="table table-striped table-bordered table-condesed table-hover">
+											<thead style="background-color:#A9D0F5">
+												<th>Nombre</th>
+												<th>Capacidad</th>
+												<th>Cantidad</th>
+												<th>Precio</th>
+												<th>Descuento</th>
+											</thead>
+											@foreach($exhibiciones_taquilla as $exhi)
+												<tr>
+													<td>{{$exhi->nomb}}</td>
+													<td>{{$exhi->capa}}</td>
+													<td>{{$exhi->cant}}</td>
+													<td>{{$exhi->prec}}</td>
+													<td>{{$exhi->desc}}</td>
+												</tr>
+											@endforeach
+
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-primary">
+							<div class="panel-body">
+							<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+									<div class="form-group">
+										<label>Paquetes</label>
+									</div>
+								</div>
+								<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+									<table id="detalles_espacio" class="table table-striped table-bordered table-condesed table-hover">
+										<thead style="background-color:#A9D0F5">
+											<th>Nombre</th>
+											<th>Capacidad</th>
+											<th>Cantidad</th>
+											<th>Precio</th>
+											<th>Descuento</th>
+										</thead>
+										@foreach($paquetes_taquilla as $paqu)
+											<tr>
+												<td>{{$paqu->nomb}}</td>
+												<td>{{$paqu->numb}}</td>
+												<td>{{$paqu->cant}}</td>
+												<td>{{$paqu->prec}}</td>
+												<td>{{$paqu->desc}}</td>
+											</tr>
+										@endforeach
+
+									</table>
+								</div>
+							</div>
+						</div>
+
+
+                                  <!--Fin Contenido-->
+                           </div>
+                        </div>
+                            
+                        </div>
+                    </div><!-- /.row -->
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+		@endif
+@endsection
+
 @section('edecan')
-		@if(isset($talleres_edecan))
+		@if(isset($edecan))
 			<div class="row">
             <div class="col-md-12">
               <div class="box">
@@ -386,3 +533,4 @@
               </div><!-- /.box -->
 		@endif
 @endsection
+
