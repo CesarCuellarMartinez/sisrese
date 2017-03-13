@@ -260,7 +260,7 @@ class ReservaController extends Controller
             if ($eedec && $etaqu) {
                return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"espacios_edecan"=>$espacios_edecan,"talleres_edecan"=>$talleres_edecan,"exhibiciones_edecan"=>$exhibiciones_edecan,"edecan"=>$edecan,"horas"=>$horas,"exhibiciones_taquilla"=>$exhibiciones_taquilla,"paquetes_taquilla"=>$paquetes_taquilla,"taquilla"=>$taquilla]);
             }
-            elseif ($edecan) {
+            elseif ($eedec) {
                  return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"espacios_edecan"=>$espacios_edecan,"talleres_edecan"=>$talleres_edecan,"exhibiciones_edecan"=>$exhibiciones_edecan,"edecan"=>$edecan,"horas"=>$horas]);
             }
             elseif ($etaqu) {
