@@ -1,4 +1,4 @@
-<!-- Left side column. contains the logo and sidebar -->
+@if (Auth::user()->valido == 1)<!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">
 
     <!-- sidebar: style can be found in sidebar.less -->
@@ -38,7 +38,7 @@
             
             @if (Auth::user()->tipo == 1)
            
-
+            <li><a href="{{ URL::to('asignar')}}"><i class='fa fa-link'></i> <span>Asignar</span></a></li>
             <li><a href="{{ URL::to('reserva')}}"><i class='fa fa-link'></i> <span>Reservas</span></a></li>
             <li><a href="{{ URL::to('instituto')}}"><i class='fa fa-link'></i> <span>Institutos</span></a></li>
              <li><a href="{{ URL::to('espacio')}}"><i class='fa fa-link'></i> <span>Espacios</span></a></li>
@@ -68,13 +68,13 @@
              @if (Auth::user()->tipo == 3)
              <li><a href="{{ URL::to('reserva')}}"><i class='fa fa-link'></i> <span>Reservas</span></a></li>  
              <li><a href="{{ URL::to('instituto')}}"><i class='fa fa-link'></i> <span>Institutos</span></a></li>     
-                 <li><a href="{{ URL::to('taquilla')}}"><i class='fa fa-link'></i> <span>Taquilla</span></a></li>
+                 
 
              @endif
              @if (Auth::user()->tipo == 4)
              <li><a href="{{ URL::to('reserva')}}"><i class='fa fa-link'></i> <span>Reservas</span></a></li>
              <li><a href="{{ URL::to('instituto')}}"><i class='fa fa-link'></i> <span>Institutos</span></a></li>       
-                 <li><a href="{{ URL::to('edecan')}}"><i class='fa fa-link'></i> <span>edecan</span></a></li>
+                 
 
              @endif
 
@@ -84,4 +84,4 @@
     </section>
     <!-- /.sidebar -->
 </aside>
-
+@endif

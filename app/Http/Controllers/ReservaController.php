@@ -287,6 +287,6 @@ class ReservaController extends Controller
         $reserva=Reserva::findOrFail($id);
         $reserva->esta='CONFIRMADO';
         $reserva->update();
-        return redirect('reserva')->with('message','Se cancelado con exito la reserva');
+        return redirect('reserva')->with('message','Se confirmado con exito la reserva');
     }
 }

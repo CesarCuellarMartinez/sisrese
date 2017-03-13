@@ -19,9 +19,9 @@
 					<thead>
 						<th>Id</th>
 						<th>Fecha</th>
-						<th>Estado</th>
-						<th>Instituto</th>
 						<th>Usuario</th>
+						<th>Instituto</th>
+						<th>Estado</th>
 						<th>Opciones</th>
 					</thead>
 					@foreach($reservas as $rese)

@@ -27,8 +27,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::get('/reserva/seleccionarHoras', 'ReservaController@seleccionarHoras');
 Route::resource('/reserva','ReservaController');
+
 //Route::resource('/reserva/eli','ReservaController@eli');
+
+Route::resource('/asignar','AsignarController');
 Route::resource('/edecan','EdecanController');
+Route::resource('/asignar','AsignarController');
 Route::resource('/taquilla','TaquillaController');
 Route::resource('/instituto','InstitutoController');
 Route::resource('/espacio','EspacioController');
@@ -49,6 +53,8 @@ Route::get('grafica_reservas', 'GraficasController@total_reservaciones');
 Route::get('/reserva/eli/{id}', 'ReservaController@eli');
 Route::get('/chart/pdf/{id}', 'ChartsController@pdf');
 Route::get('/reserva/con/{id}', 'ReservaController@con');
+Route::get('/asignar/con/{id}', 'AsignarController@con');
+Route::get('/asignar/des/{id}', 'AsignarController@des');
 Route::get('/taller/eli/{id}', 'TallerController@eli');
 Route::get('/instituto/eli/{id}', 'InstitutoController@eli');
 Route::get('/espacio/eli/{id}', 'EspacioController@eli');

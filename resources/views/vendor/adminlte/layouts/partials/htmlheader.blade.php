@@ -1,3 +1,4 @@
+
 <head>
     <meta charset="UTF-8">
     <title> Tin Marin - @yield('htmlheader_title', 'Reservas') </title>
@@ -25,3 +26,4 @@
         ]); ?>
     </script>
 </head>
+

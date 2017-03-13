@@ -1,3 +1,4 @@
+@if (Auth::user()->valido == 1)
 @extends('adminlte::layouts.app')
 
 @section('htmlheader_title')
@@ -41,3 +42,5 @@
         });
     </script>
 @endpush
+
+@endif

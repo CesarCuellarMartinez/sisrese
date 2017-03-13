@@ -1,3 +1,4 @@
+
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- JQuery and bootstrap are required by Laravel 5.3 in resources/assets/js/bootstrap.js-->
