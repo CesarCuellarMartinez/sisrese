@@ -145,12 +145,8 @@
 		      				<input type="checkbox" name="bus" value="1"> Bus
 		    		</label>	
 			</div>
-			<div class="row">
-			<div class="col-xs-1">
-				<label for="desc">Descuento</label>
-				<input type="number" name="desc" class="form-control" placeholder="Descuento...">
-			</div>
-			</div>
+			
+		
 			<div class="row">
 			<div class="col-xs-1">
 				<label for="cant_adul">Cantidad Adultos</label>
@@ -181,6 +177,21 @@
 				<label for="prec_nino">Precio Niños</label>
 				<input type="number" step="0.1" name="prec_nino" class="form-control" placeholder="Niño...">
 			</div>
+		
+			<div class="col-xs-1">
+				<label for="totalpersonas">Total Personas</label>
+				<input type="text" name="txtPersonas" class="form-control" placeholder="Niño...">
+			</div>
+				
+			
+			<div class="col-xs-1">
+				<label for="desc">Descuento precio</label>
+				<input type="number" name="desc" class="form-control" placeholder="Descuento...">
+			</div>
+			<div class="col-lg-2 ">
+						<button type="button" id="Sumar" class="btn btn-primary">Calcular Totales</button>
+					
+				</div>
 			</div>
 			<div class="row">
 			<div class="col-lg-6">
@@ -678,6 +689,20 @@
 		function limpiar_espacio(){
 			$("#pcant_espacio").val("");
 		}
+		$(document).ready(function(){
+			$('#Sumar').click(function(){
+				Sumar();
+			});
+		});
+		tpersonas=0;
+		function Sumar(){
+						// body...
+			num1=$("#cant_adul").val();
+			num2=$("#cant_nino").val();
+			num3=$("#cant_prof").val();
+			tpersonas= num1+num2+num3;
+			$("#txtPersonas").html(tpersonas);
+					}
 	</script>
 	@endpush
                                   <!--Fin Contenido-->

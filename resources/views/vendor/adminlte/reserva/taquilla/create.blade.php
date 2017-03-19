@@ -15,36 +15,37 @@
 				</div>
 			@endif
 			{!!Form::open(array('url'=>'taquilla','method'=>'POST','autocomplete'=>'off'))!!}
-			
-			<div class="form-group">
+			<div class="row">
+			<div class="col-xs-2">
 				<label for="cant_adul">Cantidad Adultos</label>
 				<input type="number" name="cant_adul" class="form-control" placeholder="Adultos...">
 			</div>
-			<div class="form-group">
+			<div class="col-xs-2">
 				<label for="cant_prof">Cantidad Profesores</label>
 				<input type="number" name="cant_prof" class="form-control" placeholder="Profesores...">
 			</div>
-			<div class="form-group">
+			<div class="col-xs-2">
 				<label for="cant_nino">Cantidad Niños</label>
 				<input type="number" name="cant_nino" class="form-control" placeholder="Niños...">
 			</div>
-			<div class="form-group">
+			<div class="col-xs-2">
 				<label for="prec_adul">Precio Adultos</label>
 				<input type="number" step="0.1" name="prec_adul" class="form-control" placeholder="Adultos...">
 			</div>
-			<div class="form-group">
+			<div class="col-xs-2">
 				<label for="prec_prof">Precio Profesores</label>
 				<input type="number" step="0.1" name="prec_prof" class="form-control" placeholder="Profesores...">
 			</div>
-			<div class="form-group">
+			<div class="col-xs-2">
 				<label for="prec_nino">Precio Niños</label>
 				<input type="number" step="0.1" name="prec_nino" class="form-control" placeholder="Niños...">
 			</div>
-			<div class="form-group">
+			</div>
+			<div class="col-lg-12">
 				<label for="come">Comentario</label>
 				<textarea class="form-control" rows="3" name="come" placeholder="Comentario..."></textarea>
 			</div>
-
+<br/><br/><br/><br/><br/><br/>
 		<div class="panel panel-primary">
 			<div class="panel-body">
 			
