@@ -150,15 +150,15 @@
 			<div class="row">
 			<div class="col-xs-1">
 				<label for="cant_adul">Cantidad Adultos</label>
-				<input type="number" name="cant_adul" class="form-control" placeholder="Adultos...">
+				<input type="number" id="pcant_adul" name="cant_adul" class="form-control" placeholder="Adultos...">
 			</div>
 			<div class="col-xs-1">
 				<label for="cant_prof">Cantidad Profesores</label>
-				<input type="number" name="cant_prof" class="form-control" placeholder="Profesores...">
+				<input type="number" id="pcant_pro" name="cant_prof" class="form-control" placeholder="Profesores...">
 			</div>
 			<div class="col-xs-1">
 				<label for="cant_nino">Cantidad Niños</label>
-				<input type="number" name="cant_nino" class="form-control" placeholder="Niños...">
+				<input type="number" id="pcant_nino" name="cant_nino" class="form-control" placeholder="Niños...">
 			</div>
 			<!--</div>-->
 		
@@ -167,29 +167,35 @@
 			<!--<div class="row">-->
 			<div class="col-xs-1">
 				<label for="prec_prof">Precio Profesores</label>
-				<input type="number" step="0.1" name="prec_prof" class="form-control" placeholder="Profesores...">
+				<input type="number" step="0.1"  id="pprec_prof" name="prec_prof" class="form-control" placeholder="Profesores...">
 			</div>
 			<div class="col-xs-1">
 				<label for="prec_adul">Precio Adultos</label>
-				<input type="number" step="0.1" name="prec_adul" class="form-control" placeholder="Adulto...">
+				<input type="number" step="0.1" id="pprec_adul" name="prec_adul" class="form-control" placeholder="Adulto...">
 			</div>
 			<div class="col-xs-1">
 				<label for="prec_nino">Precio Niños</label>
-				<input type="number" step="0.1" name="prec_nino" class="form-control" placeholder="Niño...">
+				<input type="number" step="0.1" id="pprec_nino" name="prec_nino" class="form-control" placeholder="Niño...">
 			</div>
-		
-			<div class="col-xs-1">
-				<label for="totalpersonas">Total Personas</label>
-				<input type="text" name="txtPersonas" class="form-control" placeholder="Niño...">
-			</div>
-				
-			
 			<div class="col-xs-1">
 				<label for="desc">Descuento precio</label>
-				<input type="number" name="desc" class="form-control" placeholder="Descuento...">
+				<input type="number" id="pdesc" name="desc" class="form-control" placeholder="Descuento...">
 			</div>
+			<div class="col-xs-1">
+				<label for="totalpersonas">Total Personas</label>
+				<h4 id="txtPersonas"></h4>
+			</div>
+			<div class="col-xs-1">
+				<label for="totalpersonas">Precio Entradas</label>
+				<h4 id="txtPrecio"></h4>
+			</div>
+			<div class="col-xs-1">
+				<label for="totalpersonas">Entradas / Descuento</label>
+				<h4 id="txtPT"></h4>
+			</div>
+		
 			<div class="col-lg-2 ">
-						<button type="button" id="Sumar" class="btn btn-primary">Calcular Totales</button>
+						<button type="button" id="Sumars" class="btn btn-primary">Calcular Totales</button>
 					
 				</div>
 			</div>
@@ -690,19 +696,42 @@
 			$("#pcant_espacio").val("");
 		}
 		$(document).ready(function(){
-			$('#Sumar').click(function(){
+			$('#Sumars').click(function(){
 				Sumar();
+			
 			});
 		});
 		tpersonas=0;
+		tadu=0;
 		function Sumar(){
 						// body...
-			num1=$("#cant_adul").val();
-			num2=$("#cant_nino").val();
-			num3=$("#cant_prof").val();
-			tpersonas= num1+num2+num3;
+			num1=$("#pcant_adul").val();
+			num2=$("#pcant_nino").val();
+			num3=$("#pcant_pro").val();
+			pAd=$("#pprec_adul").val();
+			pNi=$("#pprec_nino").val();
+			pPr=$("#pprec_prof").val();
+			desc=$("#pdesc").val();
+			if(num1!="" && num2!="" && num3!=""){
+				
+			tpersonas=parseInt(num1)+parseInt(num2)+parseInt(num3);
+			tadu=parseInt(num1)*parseFloat(pAd);
+			tpro=parseInt(num2)*parseFloat(pPr);
+			tnin=parseInt(num3)*parseFloat(pNi);
+			tprec=parseFloat(tadu)+parseFloat(tpro)+parseFloat(tnin);
+		    top=tpersonas;
+				descuento=parseFloat(tprec)*(desc/100)
+				pt=parseFloat(tprec)-parseFloat(descuento);
 			$("#txtPersonas").html(tpersonas);
+			$("#txtPrecio").html("$"+tprec);			
+			$("#txtPT").html("$"+pt);	
+			}
+			else{
+				alert('La cantidad de personas debe de ser mayor a 0');
+			}
+			
 					}
+					
 	</script>
 	@endpush
                                   <!--Fin Contenido-->
