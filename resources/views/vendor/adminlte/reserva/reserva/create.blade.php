@@ -179,25 +179,27 @@
 			</div>
 			<div class="col-xs-1">
 				<label for="desc">Descuento precio</label>
-				<input type="number" id="pdesc" name="desc" class="form-control" placeholder="Descuento...">
+				<input type="number" id="pdesc" name="desc" class="form-control" placeholder="Descuento..." onkeyup="Sumar()">
 			</div>
 			<div class="col-xs-1">
 				<label for="totalpersonas">Total Personas</label>
-				<h4 id="txtPersonas"></h4>
+				<output type="number" id="txtPersonas" name="desc" class="form-control" placeholder="0">
+				<!--<h4 id="txtPersonas"></h4>-->
 			</div>
 			<div class="col-xs-1">
 				<label for="totalpersonas">Precio Entradas</label>
-				<h4 id="txtPrecio"></h4>
+
+				<output type="number" id="txtPrecio" name="desc" class="form-control" placeholder="0">
+				<!--<h4 id="txtPrecio"></h4>-->
 			</div>
 			<div class="col-xs-1">
 				<label for="totalpersonas">Entradas / Descuento</label>
-				<h4 id="txtPT"></h4>
+
+				<output type="number" id="txtPT" name="desc" class="form-control" placeholder="0">
+				<!--<h4 id="txtPT"></h4>-->
 			</div>
 		
-			<div class="col-lg-2 ">
-						<button type="button" id="Sumars" class="btn btn-primary">Calcular Totales</button>
-					
-				</div>
+		
 			</div>
 			<div class="row">
 			<div class="col-lg-6">
@@ -490,7 +492,44 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">
+		
+			<div class="col-xs-2">
+				<label for="totalpersonas">Entradas</label>
 
+				$<output type="number" id="tEnt" name="desc" class="form-control" placeholder="0">
+				<!--<h4 id="txtPT"></h4>-->
+			</div>
+			<div class="col-xs-2">
+				<label for="totalpersonas">Exibicion</label>
+
+				$<output type="number" id="tExi" name="desc" class="form-control" placeholder="0">
+				<!--<h4 id="txtPT"></h4>-->
+			</div>
+			<div class="col-xs-2">
+				<label for="totalpersonas">Talleres</label>
+
+				$<output type="number" id="tTal" name="desc" class="form-control" placeholder="0">
+				<!--<h4 id="txtPT"></h4>-->
+			</div>
+		<div class="col-xs-2">
+				<label for="totalpersonas">Paquete</label>
+
+				$<output type="number" id="tPaq" name="desc" class="form-control" placeholder="0">
+				<!--<h4 id="txtPT"></h4>-->
+			</div>
+			<div class="col-xs-2">
+				<label for="totalpersonas">Total a Pagar</label>
+
+				<output type="number" id="tTP" name="desc" class="form-control" placeholder="0">
+				<!--<h4 id="txtPT"></h4>-->
+			</div>
+			
+
+		</div>
+<br/>
+			<br/>
+			<br/>
 
 			<div class="form-group">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
@@ -533,6 +572,7 @@
 				cont_taller++;
 				limpiar_taller();
 				$("#total_taller").html("S/. " +total_taller);
+				$("#tTal").html(total_taller);
 				//evaluar();
 				$("#detalles_taller").append(fila_taller);
 			}
@@ -582,6 +622,7 @@
 				cont_exhibicion++;
 				limpiar_exhibicion();
 				$("#total_exhibicion").html("S/. " +total_exhibicion);
+				$("#tExi").html(total_exhibicion);
 				//evaluar();
 				$("#detalles_exhibicion").append(fila_exhibicion);
 			}
@@ -603,6 +644,7 @@
 		$(document).ready(function(){
 			$('#bt_add_paquete').click(function(){
 				agregar_paquete();
+				totalInvertir();
 			});
 		});
 		var cont_paquete=0;
@@ -632,6 +674,7 @@
 				cont_paquete++;
 				limpiar_paquete();
 				$("#total_paquete").html("S/. " +total_paquete);
+				$("#tPaq").html(total_paquete);
 				//evaluar();
 				$("#detalles_paquete").append(fila_paquete);
 			}
@@ -679,6 +722,7 @@
 				cont_espacio++;
 				limpiar_espacio();
 				$("#total_espacio").html(total_espacio);
+				
 				//evaluar();
 				$("#detalles_espacio").append(fila_espacio);
 			}
@@ -695,12 +739,7 @@
 		function limpiar_espacio(){
 			$("#pcant_espacio").val("");
 		}
-		$(document).ready(function(){
-			$('#Sumars').click(function(){
-				Sumar();
-			
-			});
-		});
+	
 		tpersonas=0;
 		tadu=0;
 		function Sumar(){
@@ -725,12 +764,39 @@
 			$("#txtPersonas").html(tpersonas);
 			$("#txtPrecio").html("$"+tprec);			
 			$("#txtPT").html("$"+pt);	
+			$("#tEnt").html(pt);
 			}
 			else{
 				alert('La cantidad de personas debe de ser mayor a 0');
 			}
 			
 					}
+		
+		function totalInvertir(){
+			tallers=$("#tTal").val();
+			entradas=$("#tEnt").val();
+			paquetes=$("#tPaq").val();
+			exhibicions=$("#tExi").val();
+			if (entradas!="") {
+				if(exhibicions!=""){
+					if(tallers!=""){
+						if(paquetes!=""){
+			tPagar=parseFloat(tallers)+parseFloat(entradas)+parseFloat(paquetes)+parseFloat(exhibicions)
+			$("#tTP").html("$"+tPagar);
+		}
+		else{
+			alert('Complete los campos de paquetes');
+		}}
+		else{
+			alert('Complete los campos de talleres');
+		}}
+		else{
+			alert('Complete los campos de exhibiciones');
+		}}
+		else{
+			alert('Complete los campos de entradas');
+		}
+		}
 					
 	</script>
 	@endpush

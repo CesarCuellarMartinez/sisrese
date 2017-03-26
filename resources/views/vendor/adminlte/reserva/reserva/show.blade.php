@@ -42,43 +42,68 @@
 			<p>{{$reserva->tele_cont}}</p>
 		</div>
 	</div>
-	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
-		<div class="form-group">
+	<div class="row">
+	<div class="col-xs-2">
+	
 			<label for="tele_cont">Cantidad niños:</label>
-			<p>{{$reserva->cant_nino}}</p>
-		</div>
-	</div>
-	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
-		<div class="form-group">
-			<label for="tele_cont">Cantidad adultos:</label>
-			<p>{{$reserva->cant_adul}}</p>
-		</div>
-	</div>
-	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
-		<div class="form-group">
-			<label for="tele_cont">Cantidad profesores:</label>
-			<p>{{$reserva->cant_prof}}</p>
-		</div>
-	</div>
-	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
-		<div class="form-group">
-			<label for="tele_cont">Precio niños:</label>
-			<p>{{$reserva->prec_nino}}</p>
-		</div>
-	</div>
-	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
-		<div class="form-group">
-			<label for="tele_cont">Precio adultos:</label>
-			<p>{{$reserva->prec_adul}}</p>
-		</div>
-	</div>
-	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
-		<div class="form-group">
-			<label for="tele_cont">Precio profesores:</label>
-			<p>{{$reserva->prec_prof}}</p>
-		</div>
-	</div>
+			<textarea id="pcant_nino" class="form-control">{{$reserva->cant_nino}}</textarea>
 		
+	</div>
+	<div class="col-xs-2">
+		
+			<label for="tele_cont">Cantidad adultos:</label>
+			<textarea id="pcant_adul" class="form-control">{{$reserva->cant_adul}}</textarea>
+	
+	</div>
+	<div class="col-xs-2">
+		
+			<label for="tele_cont">Cantidad profesores:</label>
+			<textarea id="pcant_pro" class="form-control">{{$reserva->cant_prof}}</textarea>
+	
+		</div>
+
+	<div class="col-xs-2">
+		
+			<label for="tele_cont">Precio niños:</label>
+			<textarea id="pprec_nino" class="form-control">{{$reserva->prec_nino}}</textarea>
+
+	</div>
+	<div class="col-xs-2">
+		
+			<label for="tele_cont">Precio adultos:</label>
+			<textarea id="pprec_adul" class="form-control">{{$reserva->prec_adul}}</textarea>
+		
+	</div>
+	<div class="col-xs-2">
+	
+			<label for="tele_cont">Precio profesores:</label>
+			<textarea id="pprec_prof" class="form-control">{{$reserva->prec_prof}}</textarea>
+	
+	</div>
+		<div class="col-xs-2">
+	
+			<label for="tele_cont">Descuento:</label>
+			<textarea id="pdesc" class="form-control" onmouseup="Sumar()">{{$reserva->desc}}</textarea>
+		
+	</div>
+	
+	<div class="col-xs-2">
+
+			<label for="tele_cont">Cantidad personas:</label>
+			<p id="txtPersonas">0</p>
+		
+	</div>
+	<div class="col-xs-2">
+		
+			<label for="tele_cont">Entradas:</label>
+			<p id="txtPT">0</p>
+		
+	</div>
+	</div>
+	<br/>
+
+	<br/>
+	<br/>
 	<div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
 		<div class="form-group">
 			<label for="corr_cont">Fecha Reservada:</label>
@@ -523,7 +548,46 @@
 									</div>
 								</div>
 							</div>
+	@push('scripts')
+	<script>
+$(function() {
+    alert('Adios');
+});
+		tpersonas=0;
+		tadu=0;
+		function Sumar(){
+						// body...
+			num1=$("#pcant_adul").html();
+			num2=$("#pcant_nino").html();
+			num3=$("#pcant_pro").html();
+			pAd=$("#pprec_adul").html();
+			pNi=$("#pprec_nino").html();
+			pPr=$("#pprec_prof").html();
+			desc=$("#pdesc").html();
+			if(num1!="" && num2!="" && num3!=""){
+				
+			tpersonas=parseInt(num1)+parseInt(num2)+parseInt(num3);
+			tadu=parseInt(num1)*parseFloat(pAd);
+			tpro=parseInt(num2)*parseFloat(pPr);
+			tnin=parseInt(num3)*parseFloat(pNi);
+			tprec=parseFloat(tadu)+parseFloat(tpro)+parseFloat(tnin);
+		    top=tpersonas;
+				descuento=parseFloat(tprec)*(desc/100)
+				pt=parseFloat(tprec)-parseFloat(descuento);
+			$("#txtPersonas").html(tpersonas);
+	
+			$("#txtPT").html("$"+pt);	
 
+			}
+			else{
+				alert('La cantidad de personas debe de ser mayor a 0');
+			}
+			
+					}
+
+
+	</script>
+	@endpush
                                   <!--Fin Contenido-->
                            </div>
                         </div>

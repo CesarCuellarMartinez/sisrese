@@ -185,7 +185,7 @@ class ReservaController extends Controller
             $reserva=DB::table('reservas as r')
             ->join('institutos as i','r.id_instituto','=','i.id')
             ->join('users as u','r.id_usua','=','u.id')
-            ->select('r.id','r.fech','r.esta','i.nomb_inst','i.nomb_cont','i.corr_cont','i.tele_cont','u.name','r.alim','r.apro','r.cant_adul','r.cant_nino','r.cant_prof','r.come','r.prec_adul','r.prec_nino','r.prec_prof','r.fech_rese','r.info_cont','r.nomb_cont')
+            ->select('r.id','r.fech','r.esta','i.nomb_inst','i.nomb_cont','i.corr_cont','i.tele_cont','u.name','r.alim','r.apro','r.cant_adul','r.cant_nino','r.cant_prof','r.come','r.prec_adul','r.prec_nino','r.prec_prof','r.desc','r.fech_rese','r.info_cont','r.nomb_cont')
             ->where('r.id','=',$id)
             ->first();
 
