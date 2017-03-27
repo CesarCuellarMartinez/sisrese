@@ -5,6 +5,8 @@
 @endsection
 {{ Session::get('message') }}
 @section('main-content')
+
+
 <di class="row">
 <div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
 		<div class="form-group">
@@ -46,44 +48,54 @@
 	<div class="col-xs-2">
 	
 			<label for="tele_cont">Cantidad niños:</label>
-			<textarea id="pcant_nino" class="form-control">{{$reserva->cant_nino}}</textarea>
+			<p>{{$reserva->cant_nino}}</p>
+			<input type="hidden" id="pcant_nino" name="_token" value="{{$reserva->cant_nino}}"></input>
 		
 	</div>
 	<div class="col-xs-2">
 		
 			<label for="tele_cont">Cantidad adultos:</label>
-			<textarea id="pcant_adul" class="form-control">{{$reserva->cant_adul}}</textarea>
+			<p>{{$reserva->cant_adul}}</p>
+			<input type="hidden" id="pcant_adul" name="_token" value="{{$reserva->cant_adul}}"></input>
 	
 	</div>
 	<div class="col-xs-2">
 		
 			<label for="tele_cont">Cantidad profesores:</label>
-			<textarea id="pcant_pro" class="form-control">{{$reserva->cant_prof}}</textarea>
+			<p>{{$reserva->cant_prof}}</p>
+			<input type="hidden" id="pcant_pro" name="_token" value="{{$reserva->cant_prof}}"></input>
 	
 		</div>
 
 	<div class="col-xs-2">
 		
 			<label for="tele_cont">Precio niños:</label>
-			<textarea id="pprec_nino" class="form-control">{{$reserva->prec_nino}}</textarea>
+			<p>{{$reserva->prec_nino}}</p>
+
+			<input type="hidden" id="pprec_nino" name="_token" value="{{$reserva->prec_nino}}"></input>
 
 	</div>
 	<div class="col-xs-2">
 		
 			<label for="tele_cont">Precio adultos:</label>
-			<textarea id="pprec_adul" class="form-control">{{$reserva->prec_adul}}</textarea>
+			<p>{{$reserva->prec_adul}}</p>
+			<input type="hidden" id="pprec_adul" name="_token" value="{{$reserva->prec_adul}}"></input>
 		
 	</div>
 	<div class="col-xs-2">
 	
 			<label for="tele_cont">Precio profesores:</label>
-			<textarea id="pprec_prof" class="form-control">{{$reserva->prec_prof}}</textarea>
+			<p>{{$reserva->prec_prof}}</p>
+			<input type="hidden" id="pprec_prof" name="_token" value="{{$reserva->prec_prof}}"></input>
 	
 	</div>
+
+				<button id="bts" class="btsw" type="submit">Ver totales</button>
 		<div class="col-xs-2">
 	
 			<label for="tele_cont">Descuento:</label>
-			<textarea id="pdesc" class="form-control" onmouseup="Sumar()">{{$reserva->desc}}</textarea>
+			<p>{{$reserva->desc}}</p>
+			<input type="hidden" id="pdesc" name="_token" value="{{$reserva->desc}}"></input>
 		
 	</div>
 	
@@ -548,13 +560,20 @@
 									</div>
 								</div>
 							</div>
+
 	@push('scripts')
 	<script>
 $(function() {
     alert('Adios');
 });
+$(window).load(function(){
+			hola();
+		});
 		tpersonas=0;
 		tadu=0;
+		function hola(){
+			alert('probando');
+		}
 		function Sumar(){
 						// body...
 			num1=$("#pcant_adul").html();

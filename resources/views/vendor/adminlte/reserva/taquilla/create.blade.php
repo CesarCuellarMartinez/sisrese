@@ -16,29 +16,33 @@
 			@endif
 			{!!Form::open(array('url'=>'taquilla','method'=>'POST','autocomplete'=>'off'))!!}
 			<div class="row">
-			<div class="col-xs-2">
+			<div class="col-xs-1">
 				<label for="cant_adul">Cantidad Adultos</label>
-				<input type="number" name="cant_adul" class="form-control" placeholder="Adultos...">
+				<input type="number" id="pcant_adul" name="cant_adul" class="form-control" placeholder="Adultos...">
 			</div>
-			<div class="col-xs-2">
+			<div class="col-xs-1">
 				<label for="cant_prof">Cantidad Profesores</label>
-				<input type="number" name="cant_prof" class="form-control" placeholder="Profesores...">
+				<input type="number" id="pcant_pro" name="cant_prof" class="form-control" placeholder="Profesores...">
 			</div>
-			<div class="col-xs-2">
+			<div class="col-xs-1">
 				<label for="cant_nino">Cantidad Niños</label>
-				<input type="number" name="cant_nino" class="form-control" placeholder="Niños...">
+				<input type="number" id="pcant_nino" name="cant_nino" class="form-control" placeholder="Niños...">
 			</div>
-			<div class="col-xs-2">
+			<div class="col-xs-1">
 				<label for="prec_adul">Precio Adultos</label>
-				<input type="number" step="0.1" name="prec_adul" class="form-control" placeholder="Adultos...">
+				<input type="number" id="pprec_adul" step="0.1" name="prec_adul" class="form-control" placeholder="Adultos...">
 			</div>
-			<div class="col-xs-2">
+			<div class="col-xs-1">
 				<label for="prec_prof">Precio Profesores</label>
-				<input type="number" step="0.1" name="prec_prof" class="form-control" placeholder="Profesores...">
+				<input type="number" id="pprec_prof" step="0.1" name="prec_prof" class="form-control" placeholder="Profesores...">
 			</div>
-			<div class="col-xs-2">
+			<div class="col-xs-1">
 				<label for="prec_nino">Precio Niños</label>
-				<input type="number" step="0.1" name="prec_nino" class="form-control" placeholder="Niños...">
+				<input type="number" id="pprec_nino" step="0.1" name="prec_nino" class="form-control" placeholder="Niños..." onkeyup="Sumar()">
+			</div>
+			<div class="col-xs-1">
+				<label for="cant_adul">Cantidad Personas</label>
+				<output type="number" id="txtPersonas" name="cant_adul" class="form-control" placeholder="Adultos...">
 			</div>
 			</div>
 			<div class="col-lg-12">
@@ -194,7 +198,35 @@
 				</div>
 			</div>
 		</div>
+<div class="row">
+		
+			<div class="col-xs-2">
+				<label for="totalpersonas">Entradas</label>
 
+				$<output type="number" id="tEnt" name="desc" class="form-control" placeholder="0">
+				<!--<h4 id="txtPT"></h4>-->
+			</div>
+			<div class="col-xs-2">
+				<label for="totalpersonas">Exibicion</label>
+
+				$<output type="number" id="tExi" name="desc" class="form-control" placeholder="0">
+				<!--<h4 id="txtPT"></h4>-->
+			</div>
+			<div class="col-xs-2">
+				<label for="totalpersonas">Paquete</label>
+
+				$<output type="number" id="tPaq" name="desc" class="form-control" placeholder="0">
+				<!--<h4 id="txtPT"></h4>-->
+			</div>
+			<div class="col-xs-2">
+				<label for="totalpersonas">Total a Pagar</label>
+
+				<output type="number" id="tTP" name="desc" class="form-control" placeholder="0">
+				<!--<h4 id="txtPT"></h4>-->
+			</div>
+			
+
+		</div>
 
 			<div class="form-group">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
@@ -237,6 +269,7 @@
 				cont_exhibicion++;
 				limpiar_exhibicion();
 				$("#total_exhibicion").html("S/. " +total_exhibicion);
+				$("#tExi").html(total_exhibicion);
 				//evaluar();
 				$("#detalles_exhibicion").append(fila_exhibicion);
 			}
@@ -258,6 +291,7 @@
 		$(document).ready(function(){
 			$('#bt_add_paquete').click(function(){
 				agregar_paquete();
+				totalInvertir();
 			});
 		});
 		var cont_paquete=0;
@@ -288,6 +322,7 @@
 				limpiar_paquete();
 				$("#total_paquete").html("S/. " +total_paquete);
 				//evaluar();
+				$("#tPaq").html(total_paquete);
 				$("#detalles_paquete").append(fila_paquete);
 			}
 			else{
@@ -303,6 +338,54 @@
 		function limpiar_paquete(){
 			$("#pcant_paquete").val("");
 			$("#pdesc_paquete").val("");
+		}
+		function Sumar(){
+						// body...
+			num1=$("#pcant_adul").val();
+			num2=$("#pcant_nino").val();
+			num3=$("#pcant_pro").val();
+			pAd=$("#pprec_adul").val();
+			pNi=$("#pprec_nino").val();
+			pPr=$("#pprec_prof").val();
+			desc=$("#pdesc").val();
+			if(num1!="" && num2!="" && num3!=""){
+				
+			tpersonas=parseInt(num1)+parseInt(num2)+parseInt(num3);
+			tadu=parseInt(num1)*parseFloat(pAd);
+			tpro=parseInt(num2)*parseFloat(pPr);
+			tnin=parseInt(num3)*parseFloat(pNi);
+			tprec=parseFloat(tadu)+parseFloat(tpro)+parseFloat(tnin);
+		    top=tpersonas;
+				descuento=parseFloat(tprec)*(desc/100)
+				pt=parseFloat(tprec)-parseFloat(descuento);
+			$("#txtPersonas").html(tpersonas);
+			$("#tEnt").html(tprec);
+			}
+			else{
+				alert('La cantidad de personas debe de ser mayor a 0');
+			}
+			
+					}
+			function totalInvertir(){
+			entradas=$("#tEnt").val();
+			paquetes=$("#tPaq").val();
+			exhibicions=$("#tExi").val();
+			if (entradas!="") {
+				if(exhibicions!=""){
+				
+						if(paquetes!=""){
+			tPagar=parseFloat(entradas)+parseFloat(paquetes)+parseFloat(exhibicions)
+			$("#tTP").html("$"+tPagar);
+		}
+		else{
+			alert('Complete los campos de paquetes');
+		}}
+		else{
+			alert('Complete los campos de exhibiciones');
+		}}
+		else{
+			alert('Complete los campos de entradas');
+		}
 		}
 	</script>
 	@endpush
