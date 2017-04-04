@@ -192,12 +192,7 @@
 				<output type="number" id="txtPrecio" name="desc" class="form-control" placeholder="0">
 				<!--<h4 id="txtPrecio"></h4>-->
 			</div>
-			<div class="col-xs-1">
-				<label for="totalpersonas">Entradas / Descuento</label>
-
-				<output type="number" id="txtPT" name="desc" class="form-control" placeholder="0">
-				<!--<h4 id="txtPT"></h4>-->
-			</div>
+			
 		
 		
 			</div>
@@ -506,22 +501,32 @@
 				$<output type="number" id="tExi" name="desc" class="form-control" placeholder="0">
 				<!--<h4 id="txtPT"></h4>-->
 			</div>
-			<div class="col-xs-2">
-				<label for="totalpersonas">Talleres</label>
-
-				$<output type="number" id="tTal" name="desc" class="form-control" placeholder="0">
-				<!--<h4 id="txtPT"></h4>-->
-			</div>
+	
 		<div class="col-xs-2">
 				<label for="totalpersonas">Paquete</label>
 
 				$<output type="number" id="tPaq" name="desc" class="form-control" placeholder="0">
 				<!--<h4 id="txtPT"></h4>-->
 			</div>
+				<div class="col-xs-2">
+				<!--<h4 id="txtPT"></h4>-->
+			</div>
+			<div class="col-xs-1">
+				<label for="totalpersonas">Aplicando Descuento</label>
+				<h3  id="dess"></h4>
+				<!--<output type="number" id="tTP" name="desc" class="form-control" placeholder="0">
+				<!--<h4 id="txtPT"></h4>-->
+			</div>
+<div class="col-xs-1">
+				<label for="totalpersonas">Sub-Total</label>
+				<h3  id="txtPT"></h4>
+				<!--<output type="number" id="txtPT" name="desc" class="form-control" placeholder="0">
+				<!--<h4 id="txtPT"></h4>-->
+			</div>			
 			<div class="col-xs-2">
 				<label for="totalpersonas">Total a Pagar</label>
-
-				<output type="number" id="tTP" name="desc" class="form-control" placeholder="0">
+				<h3  id="tTP"></h4>
+				<!--<output type="number" id="tTP" name="desc" class="form-control" placeholder="0">
 				<!--<h4 id="txtPT"></h4>-->
 			</div>
 			
@@ -572,7 +577,7 @@
 				cont_taller++;
 				limpiar_taller();
 				$("#total_taller").html("S/. " +total_taller);
-				$("#tTal").html(total_taller);
+			//$("#tTal").html(total_taller);
 				//evaluar();
 				$("#detalles_taller").append(fila_taller);
 			}
@@ -763,8 +768,8 @@
 				pt=parseFloat(tprec)-parseFloat(descuento);
 			$("#txtPersonas").html(tpersonas);
 			$("#txtPrecio").html("$"+tprec);			
-			$("#txtPT").html("$"+pt);	
-			$("#tEnt").html(pt);
+			$("#dess").html(desc+"%");
+			$("#tEnt").html(tprec);
 			}
 			else{
 				alert('La cantidad de personas debe de ser mayor a 0');
@@ -773,22 +778,21 @@
 					}
 		
 		function totalInvertir(){
-			tallers=$("#tTal").val();
 			entradas=$("#tEnt").val();
 			paquetes=$("#tPaq").val();
 			exhibicions=$("#tExi").val();
+			desc=$("#pdesc").val();
 			if (entradas!="") {
 				if(exhibicions!=""){
-					if(tallers!=""){
 						if(paquetes!=""){
-			tPagar=parseFloat(tallers)+parseFloat(entradas)+parseFloat(paquetes)+parseFloat(exhibicions)
-			$("#tTP").html("$"+tPagar);
+			tPagar=parseFloat(entradas)+parseFloat(paquetes)+parseFloat(exhibicions);
+			descu=parseFloat(tPagar)*(parseFloat(desc)/100);
+			TP=parseFloat(tPagar)-parseFloat(descu);
+			$("#tTP").html("$"+TP);
+			$("#txtPT").html("$"+tPagar);	
 		}
 		else{
 			alert('Complete los campos de paquetes');
-		}}
-		else{
-			alert('Complete los campos de talleres');
 		}}
 		else{
 			alert('Complete los campos de exhibiciones');

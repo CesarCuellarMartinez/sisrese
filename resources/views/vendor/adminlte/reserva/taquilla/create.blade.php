@@ -44,6 +44,11 @@
 				<label for="cant_adul">Cantidad Personas</label>
 				<output type="number" id="txtPersonas" name="cant_adul" class="form-control" placeholder="Adultos...">
 			</div>
+			<div class="col-xs-1">
+				<label for="cant_adul">Descuento Entradas</label>
+
+				<output type="number" id="txtPersonas" name="cant_adul" class="form-control" placeholder="Adultos...">
+			</div>
 			</div>
 			<div class="col-lg-12">
 				<label for="come">Comentario</label>
@@ -220,8 +225,9 @@
 			</div>
 			<div class="col-xs-2">
 				<label for="totalpersonas">Total a Pagar</label>
+				<h4 id="tTP"></h4>
 
-				<output type="number" id="tTP" name="desc" class="form-control" placeholder="0">
+				<!--<output type="number" id="tTP" name="desc" class="form-control" placeholder="0">
 				<!--<h4 id="txtPT"></h4>-->
 			</div>
 			
