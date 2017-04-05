@@ -192,6 +192,12 @@
 				<output type="number" id="txtPrecio" name="desc" class="form-control" placeholder="0">
 				<!--<h4 id="txtPrecio"></h4>-->
 			</div>
+			<div class="col-xs-1">
+				<label for="totalpersonas">Sub-Total</label>
+				<h3  id="txtPT"></h4>
+				<!--<output type="number" id="txtPT" name="desc" class="form-control" placeholder="0">
+				<!--<h4 id="txtPT"></h4>-->
+			</div>	
 			
 		
 		
@@ -496,7 +502,7 @@
 				<!--<h4 id="txtPT"></h4>-->
 			</div>
 			<div class="col-xs-2">
-				<label for="totalpersonas">Exibicion</label>
+				<label for="totalpersonas">Talleres</label>
 
 				$<output type="number" id="tExi" name="desc" class="form-control" placeholder="0">
 				<!--<h4 id="txtPT"></h4>-->
@@ -511,14 +517,9 @@
 				<div class="col-xs-2">
 				<!--<h4 id="txtPT"></h4>-->
 			</div>
-			<div class="col-xs-1">
-				<label for="totalpersonas">Aplicando Descuento</label>
-				<h3  id="dess"></h4>
-				<!--<output type="number" id="tTP" name="desc" class="form-control" placeholder="0">
-				<!--<h4 id="txtPT"></h4>-->
-			</div>
+			
 <div class="col-xs-1">
-				<label for="totalpersonas">Sub-Total</label>
+				<!--<label for="totalpersonas">Sub-Total</label>
 				<h3  id="txtPT"></h4>
 				<!--<output type="number" id="txtPT" name="desc" class="form-control" placeholder="0">
 				<!--<h4 id="txtPT"></h4>-->
@@ -577,7 +578,7 @@
 				cont_taller++;
 				limpiar_taller();
 				$("#total_taller").html("S/. " +total_taller);
-			//$("#tTal").html(total_taller);
+				$("#tExi").html(total_taller);
 				//evaluar();
 				$("#detalles_taller").append(fila_taller);
 			}
@@ -627,7 +628,7 @@
 				cont_exhibicion++;
 				limpiar_exhibicion();
 				$("#total_exhibicion").html("S/. " +total_exhibicion);
-				$("#tExi").html(total_exhibicion);
+				//$("#tExi").html(total_exhibicion);
 				//evaluar();
 				$("#detalles_exhibicion").append(fila_exhibicion);
 			}
@@ -767,9 +768,9 @@
 				descuento=parseFloat(tprec)*(desc/100)
 				pt=parseFloat(tprec)-parseFloat(descuento);
 			$("#txtPersonas").html(tpersonas);
-			$("#txtPrecio").html("$"+tprec);			
-			$("#dess").html(desc+"%");
-			$("#tEnt").html(tprec);
+			$("#txtPrecio").html(tprec);
+			$("#txtPT").html("$"+pt);
+			$("#tEnt").html(pt);
 			}
 			else{
 				alert('La cantidad de personas debe de ser mayor a 0');
@@ -788,8 +789,7 @@
 			tPagar=parseFloat(entradas)+parseFloat(paquetes)+parseFloat(exhibicions);
 			descu=parseFloat(tPagar)*(parseFloat(desc)/100);
 			TP=parseFloat(tPagar)-parseFloat(descu);
-			$("#tTP").html("$"+TP);
-			$("#txtPT").html("$"+tPagar);	
+			$("#tTP").html("$"+tPagar);	
 		}
 		else{
 			alert('Complete los campos de paquetes');
