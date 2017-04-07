@@ -49,7 +49,20 @@
 
 				<output type="number" id="txtPersonas" name="cant_adul" class="form-control" placeholder="Adultos...">
 			</div>
+			<div class="col-xs-1">
+				<label for="totalpersonas">Buses (Aproximado)</label>
+				<h3  id="txtB"></h4>
+				<!--<output type="number" id="txtPT" name="desc" class="form-control" placeholder="0">
+				<!--<h4 id="txtPT"></h4>-->
+			</div>	
+				<div class="col-xs-1">
+				<label for="totalpersonas">Guias (Aproximado)</label>
+				<h3  id="txtG"></h4>
+				<!--<output type="number" id="txtPT" name="desc" class="form-control" placeholder="0">
+				<!--<h4 id="txtPT"></h4>-->
+			</div>	
 			</div>
+					
 			<div class="col-lg-12">
 				<label for="come">Comentario</label>
 				<textarea class="form-control" rows="3" name="come" placeholder="Comentario..."></textarea>
@@ -364,8 +377,14 @@
 		    top=tpersonas;
 				descuento=parseFloat(tprec)*(desc/100)
 				pt=parseFloat(tprec)-parseFloat(descuento);
+				buses= parseInt(tpersonas)/60;
+			    guias= parseInt(tpersonas)/20;
 			$("#txtPersonas").html(tpersonas);
 			$("#tEnt").html(tprec);
+
+			$("#txtB").html(parseInt(buses));
+			$("#txtG").html(parseInt(guias));
+
 			}
 			else{
 				alert('La cantidad de personas debe de ser mayor a 0');

@@ -197,6 +197,18 @@
 				<h3  id="txtPT"></h4>
 				<!--<output type="number" id="txtPT" name="desc" class="form-control" placeholder="0">
 				<!--<h4 id="txtPT"></h4>-->
+			</div>
+				<div class="col-xs-1">
+				<label for="totalpersonas">Buses (Aproximado)</label>
+				<h3  id="txtB"></h4>
+				<!--<output type="number" id="txtPT" name="desc" class="form-control" placeholder="0">
+				<!--<h4 id="txtPT"></h4>-->
+			</div>	
+				<div class="col-xs-1">
+				<label for="totalpersonas">Guias (Aproximado)</label>
+				<h3  id="txtG"></h4>
+				<!--<output type="number" id="txtPT" name="desc" class="form-control" placeholder="0">
+				<!--<h4 id="txtPT"></h4>-->
 			</div>	
 			
 		
@@ -767,10 +779,15 @@
 		    top=tpersonas;
 				descuento=parseFloat(tprec)*(desc/100)
 				pt=parseFloat(tprec)-parseFloat(descuento);
+			buses= parseInt(tpersonas)/60;
+			guias= parseInt(tpersonas)/20;
+
 			$("#txtPersonas").html(tpersonas);
 			$("#txtPrecio").html(tprec);
 			$("#txtPT").html("$"+pt);
 			$("#tEnt").html(pt);
+			$("#txtB").html(parseInt(buses));
+			$("#txtG").html(parseInt(guias));
 			}
 			else{
 				alert('La cantidad de personas debe de ser mayor a 0');
