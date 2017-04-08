@@ -188,9 +188,27 @@ class ReservaController extends Controller
             ->select('r.id','r.fech','r.esta','i.nomb_inst','i.nomb_cont','i.corr_cont','i.tele_cont','u.name','r.alim','r.apro','r.cant_adul','r.cant_nino','r.cant_prof','r.come','r.prec_adul','r.prec_nino','r.prec_prof','r.desc','r.fech_rese','r.info_cont','r.nomb_cont')
             ->where('r.id','=',$id)
             ->first();
+            $cantNi=$reserva->cant_nino;
+            $cantAd=$reserva->cant_adul;
+            $cantPr=$reserva->cant_prof;
+            $cantPer=$cantNi+$cantAd+$cantPr;
+            $buse=$cantPer/60;
+            $bus=intval($buse);
+            $gui=$cantPer/20;
+            if ($gui<0.5) {
+                $guia=1;
+            }else{
+                $guia=intval($gui);
+            }
+            $preNi=$reserva->prec_nino;
+            $preAd=$reserva->prec_adul;
+            $prePr=$reserva->prec_prof;
+            $descu=$reserva->desc;
+            $entra=($preNi*$cantNi)+($preAd*$cantAd)+($prePr*$cantPr);
+            $dc=$entra*($descu/100);
+            $entrada=$entra-$dc;
 
-            $espacios=DB::table('espacio_reserva as er')
-            ->join('espacios as e','er.id_espacio','e.id')
+            $espacios=DB::table('espacio_reserva as er')            ->join('espacios as e','er.id_espacio','e.id')
             ->select('e.nomb','e.capa','er.cant')
             ->where('er.id_reserva','=',$id)
             ->get();
@@ -214,7 +232,7 @@ class ReservaController extends Controller
             ->select('h.hora_inic','h.hora_fina')
             ->where('hr.id_reserva','=',$id)
             ->get();
-
+            
             if (Edecan::where('id_reserva', '=', $id)->count() > 0) {
                 $edecan = DB::table('edecanes as e')
                 ->join('users as u','e.id_usua','=','u.id')
@@ -258,16 +276,16 @@ class ReservaController extends Controller
                 $etaqu=true;
             }
             if ($eedec && $etaqu) {
-               return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"espacios_edecan"=>$espacios_edecan,"talleres_edecan"=>$talleres_edecan,"exhibiciones_edecan"=>$exhibiciones_edecan,"edecan"=>$edecan,"horas"=>$horas,"exhibiciones_taquilla"=>$exhibiciones_taquilla,"paquetes_taquilla"=>$paquetes_taquilla,"taquilla"=>$taquilla]);
+               return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"espacios_edecan"=>$espacios_edecan,"talleres_edecan"=>$talleres_edecan,"exhibiciones_edecan"=>$exhibiciones_edecan,"edecan"=>$edecan,"horas"=>$horas,"exhibiciones_taquilla"=>$exhibiciones_taquilla,"paquetes_taquilla"=>$paquetes_taquilla,"taquilla"=>$taquilla,"cantPer"=>$cantPer,"bus"=>$bus,"guia"=>$guia,"entra"=>$entra,"entrada"=>$entrada]);
             }
             elseif ($eedec) {
-                 return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"espacios_edecan"=>$espacios_edecan,"talleres_edecan"=>$talleres_edecan,"exhibiciones_edecan"=>$exhibiciones_edecan,"edecan"=>$edecan,"horas"=>$horas]);
+                 return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"espacios_edecan"=>$espacios_edecan,"talleres_edecan"=>$talleres_edecan,"exhibiciones_edecan"=>$exhibiciones_edecan,"edecan"=>$edecan,"horas"=>$horas,"cantPer"=>$cantPer,"bus"=>$bus,"guia"=>$guia,"entra"=>$entra,"entrada"=>$entrada]);
             }
             elseif ($etaqu) {
-                return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"exhibiciones_taquilla"=>$exhibiciones_taquilla,"paquetes_taquilla"=>$paquetes_taquilla,"taquilla"=>$taquilla,"horas"=>$horas]);
+                return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"exhibiciones_taquilla"=>$exhibiciones_taquilla,"paquetes_taquilla"=>$paquetes_taquilla,"taquilla"=>$taquilla,"horas"=>$horas,"cantPer"=>$cantPer,"bus"=>$bus,"guia"=>$guia,"entra"=>$entra,"entrada"=>$entrada]);
             }
             else{
-                return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"horas"=>$horas]);
+                return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"horas"=>$horas,"cantPer"=>$cantPer,"bus"=>$bus,"guia"=>$guial,"entra"=>$entra,"entrada"=>$entrada]);
             }      
 
     }

@@ -73,43 +73,54 @@
 			<label for="tele_cont">Precio niños:</label>
 			<p>{{$reserva->prec_nino}}</p>
 
-			<input type="hidden" id="pprec_nino" name="_token" value="{{$reserva->prec_nino}}"></input>
-
 	</div>
 	<div class="col-xs-2">
 		
 			<label for="tele_cont">Precio adultos:</label>
 			<p>{{$reserva->prec_adul}}</p>
-			<input type="hidden" id="pprec_adul" name="_token" value="{{$reserva->prec_adul}}"></input>
 		
 	</div>
 	<div class="col-xs-2">
 	
 			<label for="tele_cont">Precio profesores:</label>
 			<p>{{$reserva->prec_prof}}</p>
-			<input type="hidden" id="pprec_prof" name="_token" value="{{$reserva->prec_prof}}"></input>
 	
 	</div>
-
-				<button id="bts" class="btsw" type="submit">Ver totales</button>
 		<div class="col-xs-2">
 	
 			<label for="tele_cont">Descuento:</label>
 			<p>{{$reserva->desc}}</p>
-			<input type="hidden" id="pdesc" name="_token" value="{{$reserva->desc}}"></input>
 		
 	</div>
 	
 	<div class="col-xs-2">
 
 			<label for="tele_cont">Cantidad personas:</label>
-			<p id="txtPersonas">0</p>
+			<p id="txtPersonas">{{$cantPer}}</p>
+		
+	</div>
+	<div class="col-xs-2">
+
+			<label for="tele_cont">Cantidad Buses:</label>
+			<p id="txtPersonas">{{$bus}}</p>
+		
+	</div>
+	<div class="col-xs-2">
+
+			<label for="tele_cont">Cantidad Guias:</label>
+			<p id="txtPersonas">{{$guia}}</p>
 		
 	</div>
 	<div class="col-xs-2">
 		
-			<label for="tele_cont">Entradas:</label>
-			<p id="txtPT">0</p>
+			<label for="tele_cont">Sub-Total/entrada:</label>
+			<p id="txtPT">{{$entra}}</p>
+		
+	</div>
+	<div class="col-xs-2">
+		
+			<label for="tele_cont">Total Entrada</label>
+			<p id="txtPT">{{$entrada}}</p>
 		
 	</div>
 	</div>
