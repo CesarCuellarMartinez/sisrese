@@ -236,6 +236,10 @@
 				$<output type="number" id="tPaq" name="desc" class="form-control" placeholder="0">
 				<!--<h4 id="txtPT"></h4>-->
 			</div>
+				<div class="col-xs-2">
+				
+				<!--<h4 id="txtPT"></h4>-->
+			</div>
 			<div class="col-xs-2">
 				<label for="totalpersonas">Total a Pagar</label>
 				<h4 id="tTP"></h4>
