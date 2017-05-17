@@ -337,18 +337,9 @@
 							<th>Exhibicion</th>
 							<th>Capacidad</th>
 							<th>N Personas</th>
-							<th>Precio</th>
-							<th>Descuento</th>
-							<th>Sub</th>
 						</thead>
 						<tfoot>
-							<th>Sub Total</th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th><h4 id="total_exhibicion">0</h4></th>
+							
 						</tfoot>
 						<tbody>
 							
@@ -630,16 +621,16 @@
 			id_exhibicion=datos_exhibicion[0];
 			capa_exhibicion=datos_exhibicion[1];
 			prec_exhibicion=$("#pprec_exhibicion").val();
-			cant_exhibicion=$("#pcant_exhibicion").val();
-			desc_exhibicion=$("#pdesc_exhibicion").val();
+			cant_exhibicion=1;
+			desc_exhibicion=0;
 			if (cant_exhibicion!="") {
 				subtotal_exhibicion[cont_exhibicion]=(cant_exhibicion*prec_exhibicion);
 				subtotal_exhibicion[cont_exhibicion]=subtotal_exhibicion[cont_exhibicion]-(subtotal_exhibicion[cont_exhibicion]*(desc_exhibicion/100));
 				total_exhibicion=total_exhibicion+subtotal_exhibicion[cont_exhibicion];
-				fila_exhibicion='<tr class="selected" id="fila_exhibicion'+cont_exhibicion+'"><td><button type="button" class="btn btn-warning" onclick="eliminar_exhibicion('+cont_exhibicion+');">X</button></td><td><input type="hidden" name="id_exhibicion[]" value="'+id_exhibicion+'">'+exhibicion+'</td><td>'+capa_exhibicion+'</td><td><input type="number" name="cant_exhibicion[]" value="'+cant_exhibicion+'"></td><td><input type="number" name="prec_exhibicion[]" value="'+prec_exhibicion+'"></td><td><input type="number" name="desc_exhibicion[]" value="'+desc_exhibicion+'"></td><td>'+subtotal_exhibicion[cont_exhibicion]+'</td></tr>';
+				fila_exhibicion='<tr class="selected" id="fila_exhibicion'+cont_exhibicion+'"><td><button type="button" class="btn btn-warning" onclick="eliminar_exhibicion('+cont_exhibicion+');">X</button></td><td><input type="hidden" name="id_exhibicion[]" value="'+id_exhibicion+'">'+exhibicion+'</td><td>'+capa_exhibicion+'</td><td><input type="number" name="cant_exhibicion[]" value="'+cant_exhibicion+'"></td></tr>';
 				cont_exhibicion++;
 				limpiar_exhibicion();
-				$("#total_exhibicion").html("S/. " +total_exhibicion);
+				
 				//$("#tExi").html(total_exhibicion);
 				//evaluar();
 				$("#detalles_exhibicion").append(fila_exhibicion);
