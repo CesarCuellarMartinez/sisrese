@@ -38,6 +38,7 @@ class EventoController extends Controller
             $data[$i] = array(
                 "title"=>$reservas[$i]->id,
                 "start"=>$reservas[$i]->fech_rese, //por el plugin asi que asignamos a cada uno el valor correspondiente
+                //"end"=>$reservas[$i]->fech_rese,
                 "url"=>"http://localhost/sisrese/public/reserva/".$reservas[$i]->id
                 //en el campo "url" concatenamos el el URL con el id del evento para luego
                 //en el evento onclick de JS hacer referencia a este y usar el método show
