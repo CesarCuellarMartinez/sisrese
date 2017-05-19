@@ -285,7 +285,7 @@ class ReservaController extends Controller
                 return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"exhibiciones_taquilla"=>$exhibiciones_taquilla,"paquetes_taquilla"=>$paquetes_taquilla,"taquilla"=>$taquilla,"horas"=>$horas,"cantPer"=>$cantPer,"bus"=>$bus,"guia"=>$guia,"entra"=>$entra,"entrada"=>$entrada]);
             }
             else{
-                return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"horas"=>$horas,"cantPer"=>$cantPer,"bus"=>$bus,"guia"=>$guial,"entra"=>$entra,"entrada"=>$entrada]);
+                return view("adminlte::reserva.reserva.show",["reserva"=>$reserva,"espacios"=>$espacios,"talleres"=>$talleres,"paquetes"=>$paquetes,"exhibiciones"=>$exhibiciones,"horas"=>$horas,"cantPer"=>$cantPer,"bus"=>$bus,"guia"=>$guia,"entra"=>$entra,"entrada"=>$entrada]);
             }      
 
     }
