@@ -44,7 +44,8 @@ class TaquillaController extends Controller
     	$request->session()->put('id_reserva', $id_reserva);
     	$paquetes=DB::table('paquete')->where('condicion','=','1')->get();
     	$exhibiciones=DB::table('exhibiciones')->where('condicion','=','1')->get();
-    	return view("adminlte::reserva.taquilla.create",["exhibiciones"=>$exhibiciones,"paquetes"=>$paquetes,"id_reserva"=>$request]);
+        $talleres=DB::table('talleres')->where('condicion','=','1')->get();
+    	return view("adminlte::reserva.taquilla.create",["exhibiciones"=>$exhibiciones,"talleres"=>$talleres,"paquetes"=>$paquetes,"id_reserva"=>$request]);
     }
     public function store(TaquillaFormRequest $request){
     	//try{
@@ -103,6 +104,21 @@ class TaquillaController extends Controller
     			$paquete_taquilla->save();
     			$cont_paquete=$cont_paquete+1;
     		}
+            $id_taller=$request->get('id_taller');
+            $prec_taller=$request->get('prec_taller');
+            $cant_taller=$request->get('cant_taller');
+            $desc_taller=$request->get('desc_taller');
+            $cont_taller=0;
+            while ($cont_taller<count($id_taller)) {
+                $taller_taquilla = new TallerTaquilla();
+                $taller_taquilla->id_taquilla=$taquilla->id;
+                $taller_taquilla->id_taller=$id_taller[$cont_taller];
+                $taller_taquilla->cant=$cant_taller[$cont_taller];
+                $taller_taquilla->prec=$prec_taller[$cont_taller];
+                $taller_taquilla->desc=$desc_taller[$cont_taller];
+                $taller_taquilla->save();
+                $cont_taller=$cont_taller+1;
+            }
     		//ESTO NOSE :V
     		//$id_hora=$request->get('id_hora');
 
