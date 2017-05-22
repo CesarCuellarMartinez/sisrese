@@ -35,23 +35,28 @@
 						
 						<td><a href="{{URL::action('ReservaController@show',['id'=>$rese->id])}}"><button class="btn btn-primary">Detalles</button></a>
 						
-					@if (Auth::user()->tipo == 1 || Auth::user()->tipo == 2 )   	
+					@if (Auth::user()->tipo == 1 || Auth::user()->tipo == 2 || Auth::user()->tipo == 3 || Auth::user()->tipo == 4 )   	
 						@if($rese->id_usua==$id_usua AND $rese->esta=='RESERVADO')
 							<a href="" data-target="#modal-confirm-{{$rese->id}}" data-toggle="modal"><button class="btn btn-danger">Confirmar</button></a>
 		
 								
 
 						@endif
-						@if($rese->edec=="NO" AND $rese->esta=='CONFIRMADO')
-							<a href="{{URL::action('EdecanController@create', ['id'=>$rese->id])}}"><button class="btn btn-primary">Edecan</button></a>
-							
+						@if (Auth::user()->tipo == 1 || Auth::user()->tipo == 4 )
+							@if($rese->edec=="NO" AND $rese->esta=='CONFIRMADO')
+								<a href="{{URL::action('EdecanController@create', ['id'=>$rese->id])}}"><button class="btn btn-primary">Edecan</button></a>
+								
 
+							@endif
 						@endif
-						@if($rese->taqu=="NO" AND $rese->esta=='CONFIRMADO')
-							<a href="{{URL::action('TaquillaController@create', ['id'=>$rese->id])}}"><button class="btn btn-primary">Taquilla</button></a>
-							
+						@if (Auth::user()->tipo == 1 || Auth::user()->tipo == 3 )
+							@if($rese->taqu=="NO" AND $rese->esta=='CONFIRMADO')
+								<a href="{{URL::action('TaquillaController@create', ['id'=>$rese->id])}}"><button class="btn btn-primary">Taquilla</button></a>
+								
 
+							@endif
 						@endif
+
 						@if($rese->id_usua==$id_usua AND $rese->esta!='CANCELADO')
 							<a href="" data-target="#modal-delete-{{$rese->id}}" data-toggle="modal"><button class="btn btn-danger">Cancelar</button></a></td>
 							@push('scripts')
