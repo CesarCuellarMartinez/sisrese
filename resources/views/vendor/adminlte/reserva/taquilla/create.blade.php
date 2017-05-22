@@ -144,6 +144,77 @@
 			
 				<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
 					<div class="form-group">
+						<label>Talleres</label>
+						<select name="pid_taller" class="form-control selectpicker" id="pid_taller" data-live-search="true">
+						@foreach($talleres as $tall)
+							<option value="{{$tall->id}}_{{$tall->capa}}_{{$tall->prec}}">{{$tall->nomb}}</option>
+						@endforeach
+						</select>
+					</div>
+				</div>
+
+				<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+					<div class="form-group">
+						<label for="pcapa_taller">Capacidad</label>
+						<input type="number" name="pcapa_taller" id="pcapa_taller" class="form-control" placeholder="capacidad">
+					</div>
+				</div>
+				<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+					<div class="form-group">
+						<label for="pcant_taller">Cantidad</label>
+						<input type="number" name="pcant_taller" id="pcant_taller" class="form-control" placeholder="cantidad">
+					</div>
+
+				</div>
+				<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+					<div class="form-group">
+						<label for="pprec_taller">Precio</label>
+						<input type="number" step="0.1" name="pprec_taller" id="pprec_taller" class="form-control" placeholder="precio">
+					</div>
+				</div>
+				<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+					<div class="form-group">
+						<label for="pdesc_taller">Descuento</label>
+						<input type="number" name="pdesc_taller" id="pdesc_taller" class="form-control" placeholder="descuento">
+					</div>
+				</div>
+				<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+					<div class="form-group">
+						<button type="button" id="bt_add_taller" class="btn btn-primary">Agregar</button>
+					</div>
+				</div>
+				<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+					<table id="detalles_taller" class="table table-striped table-bordered table-condesed table-hover">
+						<thead style="background-color:#A9D0F5">
+							<th>Opciones</th>
+							<th>Taller</th>
+							<th>Capacidad</th>
+							<th>N Personas</th>
+							<th>Precio</th>
+							<th>Descuento</th>
+							<th>Sub</th>
+						</thead>
+						<tfoot>
+							<th>Sub Total</th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th><h4 id="total_taller">0</h4></th>
+						</tfoot>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-primary">
+			<div class="panel-body">
+			
+				<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+					<div class="form-group">
 						<label>Paquetes</label>
 						<select name="pid_paquete" class="form-control selectpicker" id="pid_paquete" data-live-search="true">
 						@foreach($paquetes as $paqu)
@@ -309,6 +380,56 @@
 		function limpiar_exhibicion(){
 			$("#pcant_exhibicion").val("");
 			$("#pdesc_exhibicion").val("");
+		}
+		//Talleres
+		$(document).ready(function(){
+			$('#bt_add_taller').click(function(){
+				agregar_taller();
+			});
+		});
+		var cont_taller=0;
+		total_taller=0;
+		subtotal_taller=[];
+		$('#pid_taller').ready(mostrarValores_Taller);
+		$('#pid_taller').change(mostrarValores_Taller);
+		function mostrarValores_Taller(){
+			datos_taller=document.getElementById('pid_taller').value.split('_');
+			$("#pcapa_taller").val(datos_taller[1]);
+			$("#pprec_taller").val(datos_taller[2]);
+		}
+		function agregar_taller(){
+			datos_taller=document.getElementById('pid_taller').value.split('_');
+			taller=$("#pid_taller option:selected").text();
+			id_taller=datos_taller[0];
+			capa_taller=datos_taller[1];
+			prec_taller=$("#pprec_taller").val();
+			cant_taller=$("#pcant_taller").val();
+			desc_taller=$("#pdesc_taller").val();
+			if (cant_taller!="") {
+				subtotal_taller[cont_taller]=(cant_taller*prec_taller);
+				subtotal_taller[cont_taller]=subtotal_taller[cont_taller]-(subtotal_taller[cont_taller]*(desc_taller/100));
+				total_taller=total_taller+subtotal_taller[cont_taller];
+				fila_taller='<tr class="selected" id="fila_taller'+cont_taller+'"><td><button type="button" class="btn btn-warning" onclick="eliminar_taller('+cont_taller+');">X</button></td><td><input type="hidden" name="id_taller[]" value="'+id_taller+'">'+taller+'</td><td>'+capa_taller+'</td><td><input type="number" name="cant_taller[]" value="'+cant_taller+'"></td><td><input type="number" name="prec_taller[]" value="'+prec_taller+'"></td><td><input type="number" name="desc_taller[]" value="'+desc_taller+'"></td><td>'+subtotal_taller[cont_taller]+'</td></tr>';
+				cont_taller++;
+				limpiar_taller();
+				$("#total_taller").html("S/. " +total_taller);
+				$("#tExi").html(total_taller);
+				//evaluar();
+				$("#detalles_taller").append(fila_taller);
+			}
+			else{
+				alert('La cantidad de personas debe de ser mayor a 0');
+			}
+		}
+		function eliminar_taller(index){
+			total_taller = total_taller - subtotal_taller[index];
+			$("#total_taller").html("S/. " +total_taller);
+			$("#fila_taller" + index).remove();
+			//evaluar();
+		}
+		function limpiar_taller(){
+			$("#pcant_taller").val("");
+			$("#pdesc_taller").val("");
 		}
 		//Paquetes
 		$(document).ready(function(){
