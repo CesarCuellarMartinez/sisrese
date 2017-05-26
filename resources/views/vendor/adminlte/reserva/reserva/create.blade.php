@@ -289,7 +289,7 @@
 		<div class="panel panel-primary">
 			<div class="panel-body">
 			
-				<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+				<div class="col-lg-5 col-sm-5 col-md-5 col-xs-12">
 					<div class="form-group">
 						<label>Exhibiciones</label>
 						<select name="pid_exhibicion" class="form-control selectpicker" id="pid_exhibicion" data-live-search="true">
@@ -306,25 +306,8 @@
 						<input type="number" name="pcapa_exhibicion" id="pcapa_exhibicion" class="form-control" placeholder="capacidad">
 					</div>
 				</div>
-				<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-					<div class="form-group">
-						<label for="pcant_exhibicion">Cantidad</label>
-						<input type="number" name="pcant_exhibicion" id="pcant_exhibicion" class="form-control" placeholder="cantidad">
-					</div>
-
-				</div>
-				<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-					<div class="form-group">
-						<label for="pprec_exhibicion">Precio</label>
-						<input type="number" name="pprec_exhibicion" id="pprec_exhibicion" class="form-control" placeholder="precio">
-					</div>
-				</div>
-				<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-					<div class="form-group">
-						<label for="pdesc_exhibicion">Descuento</label>
-						<input type="number" name="pdesc_exhibicion" id="pdesc_exhibicion" class="form-control" placeholder="descuento">
-					</div>
-				</div>
+			
+			
 				<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
 					<div class="form-group">
 						<button type="button" id="bt_add_exhibicion" class="btn btn-primary">Agregar</button>
