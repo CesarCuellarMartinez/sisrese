@@ -604,7 +604,7 @@
 			id_exhibicion=datos_exhibicion[0];
 			capa_exhibicion=datos_exhibicion[1];
 			prec_exhibicion=$("#pprec_exhibicion").val();
-			cant_exhibicion=1;
+			cant_exhibicion=20;
 			desc_exhibicion=0;
 			if (cant_exhibicion!="") {
 				subtotal_exhibicion[cont_exhibicion]=(cant_exhibicion*prec_exhibicion);
@@ -737,8 +737,8 @@
 		function Sumar(){
 						// body...
 			num1=$("#pcant_adul").val();
-			num2=$("#pcant_nino").val();
-			num3=$("#pcant_pro").val();
+			num2=$("#pcant_pro").val();
+			num3=$("#pcant_nino").val();
 			pAd=$("#pprec_adul").val();
 			pNi=$("#pprec_nino").val();
 			pPr=$("#pprec_prof").val();
