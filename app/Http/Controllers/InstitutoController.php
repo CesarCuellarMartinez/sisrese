@@ -20,7 +20,7 @@ class InstitutoController extends Controller
             //Este view si es la absoluta dentro de carpetas
     		return view('adminlte::reserva.instituto.index',["institutos"=>$institutos,"searchText"=>$query]);
     	}
-    }
+	}
     public function create(){
     	return view("adminlte::reserva.instituto.create");
     }
